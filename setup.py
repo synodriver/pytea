@@ -7,7 +7,7 @@ from Cython.Build import cythonize
 
 ext_modules = [
     Extension("pytea.tea",
-              sources=["pytea/tea.pyx", "pytea/src/tea.c"], library_dirs=["pytea/src"])
+              sources=["pytea/tea.pyx", "pytea/src/tea.c"], library_dirs=["pytea/src","pytea"])
 ]
 
 
