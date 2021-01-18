@@ -5,7 +5,7 @@ from pytea cimport tea
 
 cdef char*conv(char*data, int size):
     """
-    转换字节序
+    倒叙
     :param data: char数组
     :param size: 长度
     :return: 
@@ -18,7 +18,10 @@ cdef char*conv(char*data, int size):
         data[size - i - 1] = temp
     return data
 
-cdef atoi(char* data):
+cdef void atoi(char* data,int size):
+    cdef int i = 0
+    for i in range(0,size,4):
+        conv(data+i,4)
 
 
 
@@ -67,7 +70,7 @@ cdef class TEA:
         if flag != tea.TEA_SUCCESS:
             raise Exception("set key wrong")
 
-    cpdef encrypt_group(self, bytes text):
+    cpdef bytes encrypt_group(self, bytes text):
         """
         加密一组 8个字节数据
         :param text: 8字节 bytes
@@ -87,7 +90,7 @@ cdef class TEA:
         r = struct.pack(b'>LL', v0, v1)
         return r  # 最后关头出问题
 
-    cpdef decrypt_group(self, bytes text): # todo 进度
+    cpdef bytes decrypt_group(self, bytes text): # todo 进度
         """
         解密一组 8个字节数据
         :param text: 
@@ -118,6 +121,7 @@ cdef class TEA:
         text = bytes([fill_n_or]) + bytes([220]) * n + text + b'\x00' * 7  # 填充
 
         cdef char*temp_data = text # 传进去字节序又变了
+        atoi(temp_data,len(text)) # 转换字节序 事实证明这一步走对了
 
         cdef tea.TEA_ErrorCode_t flag = tea.TEA_Encrypt(<tea.TEA_U8*> temp_data, <tea.TEA_U32> len(text))
         if flag == tea.TEA_ERROR:
@@ -126,26 +130,35 @@ cdef class TEA:
             raise MemoryError("out of memory")
         elif flag == tea.TEA_OTHERS:
             raise Exception("sth wrong")
+        atoi(temp_data,len(text))
         return <bytes> temp_data
+
 
     cpdef decrypt(self, bytes text):
         """
-        解密后,应该除去加密的时候填充的字节
+        传入填充了的数据 解密后,应该除去加密的时候填充的字节
         :param text: 
         :return: 
         """
         cdef int l = len(text)
         if l % 8 != 0 or l < 16:
-            raise ValueError("decrypt failed, len%8！=0")
+            raise ValueError("decrypt failed, len%8!=0")
 
-        cdef char*temp_data = text
-        cdef tea.TEA_ErrorCode_t flag = tea.TEA_Decrypt(<tea.TEA_U8*> temp_data, <tea.TEA_U32> l)
+        cdef tea.TEA_U8 tag = 0
+        cdef char* temp_data = text
+        atoi(temp_data,l)
+
+        cdef tea.TEA_ErrorCode_t flag = tea.TEA_Decrypt(<tea.TEA_U8*> temp_data, <tea.TEA_U32> l,&tag)
         if flag == tea.TEA_ERROR:
             raise ValueError("decrypt failed")
         elif flag == tea.TEA_MEMORY_ERROR:
             raise MemoryError("out of memory")
         elif flag == tea.TEA_OTHERS:
             raise Exception("sth wrong")
-        data = <bytes> temp_data
+
+        atoi(temp_data, l)
+        data=<bytes> temp_data[0:l]
         if data[-7:] != b"\x00" * 7:
             raise ValueError("decrypt failed: illegal bytes ends without 0000000")
+        return data[tag:-7]
+

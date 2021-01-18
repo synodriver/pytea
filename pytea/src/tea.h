@@ -50,7 +50,7 @@ TEA_ErrorCode_t TEA_Config128bitsKey(TEA_U8 *key);
 TEA_ErrorCode_t TEA_ConfigEncryptTimes(TEA_U8 t);
 
 TEA_ErrorCode_t TEA_Encrypt(TEA_U8 *text, TEA_U32 size);
-TEA_ErrorCode_t TEA_Decrypt(TEA_U8 *text, TEA_U32 size);
+TEA_ErrorCode_t TEA_Decrypt(TEA_U8 *text, TEA_U32 size,TEA_U8* tag);
 
 TEA_ErrorCode_t TEA_EncryptGroup(TEA_U32 *text, TEA_U32 *key);
 TEA_ErrorCode_t TEA_DecryptGroup(TEA_U32 *text, TEA_U32 *key);

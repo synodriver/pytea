@@ -78,20 +78,20 @@ class TEA:
             r += tr
         return r
 
-    def decrypt(self, v: bytes):
-        l = len(v)
-        prePlain = tea_decipher(v, self.secret_key)
+    def decrypt(self, text: bytes):  # v不可变
+        l = len(text)
+        prePlain = tea_decipher(text, self.secret_key)
         pos = (prePlain[0] & 0x07) + 2
-        r = prePlain
-        preCrypt = v[0:8]
+        ret = prePlain
+        preCrypt = text[0:8]
         for i in range(8, l, 8):
-            x = xor(tea_decipher(xor(v[i:i + 8], prePlain), self.secret_key), preCrypt)
+            x = xor(tea_decipher(xor(text[i:i + 8], prePlain), self.secret_key), preCrypt) # 跳过了前8个字节
             prePlain = xor(x, preCrypt)
-            preCrypt = v[i:i + 8]
-            r += x
-        if r[-7:] != b'\0' * 7:
+            preCrypt = text[i:i + 8]
+            ret += x
+        if ret[-7:] != b'\0' * 7:
             return None
-        return r[pos + 1:-7]
+        return ret[pos + 1:-7]
 
 
 if __name__ == '__main__':
