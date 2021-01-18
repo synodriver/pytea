@@ -6,6 +6,7 @@ cdef extern from "src/tea.h":
     ctypedef signed short   TEA_S16
     ctypedef unsigned int   TEA_U32
     ctypedef signed int     TEA_S32
+    ctypedef unsigned long long TEA_U64
 
     ctypedef enum TEA_ErrorCode_t:
         TEA_ERROR

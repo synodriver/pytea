@@ -1,13 +1,32 @@
 # -*- coding: utf-8 -*-
 import os
 import re
+from collections import defaultdict
 
 from setuptools import Extension, setup, find_packages
+from setuptools.command.build_ext import build_ext
 from Cython.Build import cythonize
+
+BUILD_ARGS = defaultdict(lambda: ['-O3', '-g0'])
+
+for compiler, args in [
+    ('msvc', ['/EHsc', '/DHUNSPELL_STATIC', r"\utf-8"]),
+    ('gcc', ['-O3', '-g0'])]:
+    BUILD_ARGS[compiler] = args
+
+
+class build_ext_compiler_check(build_ext):
+    def build_extensions(self):
+        compiler = self.compiler.compiler_type
+        args = BUILD_ARGS[compiler]
+        for ext in self.extensions:
+            ext.extra_compile_args = args
+        super().build_extensions()
+
 
 ext_modules = [
     Extension("pytea.tea",
-              sources=["pytea/tea.pyx", "pytea/src/tea.c"], library_dirs=["pytea/src","pytea"])
+              sources=["pytea/tea.pyx", "pytea/src/tea.c"], library_dirs=["pytea/src", "pytea"])
 ]
 
 

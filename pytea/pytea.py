@@ -9,66 +9,70 @@ def xor(a, b):
     return struct.pack(b'>LL', (a1 ^ b1) & op, (a2 ^ b2) & op)
 
 
-def tea_code(v, k):
+def tea_code(v, k) -> bytes:  # 传入8字节数据 16字节key
     n = 16
-    op = 0xffffffff
-    delta = 0x9e3779b9
+    op = 0xFFFFFFFF
+    delta = 0x9E3779B9
     k = struct.unpack(b'>LLLL', k[0:16])
-    y, z = struct.unpack(b'>LL', v[0:8])
-    s = 0
+    v0, v1 = struct.unpack(b'>LL', v[0:8])
+    sum_ = 0
     for i in range(n):
-        s += delta
-        y += (op & (z << 4)) + k[0] ^ z + s ^ (op & (z >> 5)) + k[1]
-        y &= op
-        z += (op & (y << 4)) + k[2] ^ y + s ^ (op & (y >> 5)) + k[3]
-        z &= op
-    r = struct.pack(b'>LL', y, z)
+        sum_ += delta
+        v0 += (op & (v1 << 4)) + k[0] ^ v1 + sum_ ^ (op & (v1 >> 5)) + k[1]
+        v0 &= op
+        v1 += (op & (v0 << 4)) + k[2] ^ v0 + sum_ ^ (op & (v0 >> 5)) + k[3]
+        v1 &= op
+    r = struct.pack(b'>LL', v0, v1)
     return r
 
 
-def tea_decipher(v: bytes, k: bytes):
+def tea_decipher(v: bytes, k: bytes) -> bytes:
     n = 16
-    op = 0xffffffff
-    y, z = struct.unpack(b'>LL', v[0:8])
-    a, b, c, d = struct.unpack(b'>LLLL', k[0:16])
+    op = 0xFFFFFFFF
+    v0, v1 = struct.unpack('>LL', v[0:8])
+    k0, k1, k2, k3 = struct.unpack(b'>LLLL', k[0:16])
     delta = 0x9E3779B9
-    s = (delta << 4) & op
+    sum_ = (delta << 4) & op  # 左移4位 就是x16
     for i in range(n):
-        z -= ((y << 4) + c) ^ (y + s) ^ ((y >> 5) + d)
-        z &= op
-        y -= ((z << 4) + a) ^ (z + s) ^ ((z >> 5) + b)
-        y &= op
-        s -= delta
-        s &= op
-    return struct.pack(b'>LL', y, z)
+        v1 -= ((v0 << 4) + k2) ^ (v0 + sum_) ^ ((v0 >> 5) + k3)
+        v1 &= op
+        v0 -= ((v1 << 4) + k0) ^ (v1 + sum_) ^ ((v1 >> 5) + k1)
+        v0 &= op
+        sum_ -= delta
+        sum_ &= op
+    return struct.pack(b'>LL', v0, v1)
 
 
 class TEA:
-    """QQ TEA 加解密, 64比特明码, 128比特密钥
-这是一个确认线程安全的独立加密模块，使用时必须要有一个全局变量secret_key，要求大于等于16位
+    """
+    QQ TEA 加解密, 64比特明码, 128比特密钥
+    这是一个确认线程安全的独立加密模块，使用时必须要有一个全局变量secret_key，要求大于等于16位
     """
 
     def __init__(self, secret_key: bytes):
         self.secret_key = secret_key
 
-    def encrypt(self, v: bytes):
-        END_CHAR = b'\0'
+    def encrypt(self, text: bytes):
+        END_CHAR = b'\x00'
         FILL_N_OR = 0xF8
-        vl = len(v)
+        vl = len(text)
         filln = (8 - (vl + 2)) % 8 + 2
         fills = b''
         for i in range(filln):
             fills = fills + bytes([220])
-        v = (bytes([(filln - 2) | FILL_N_OR])
-             + fills
-             + v
-             + END_CHAR * 7)
+        text = (bytes([(filln - 2) | FILL_N_OR])
+                + fills
+                + text
+                + END_CHAR * 7)
+        # print(f"长度{len(text)}") 不是长度的问题
+        # 以上是填充
+
         tr = b'\0' * 8
         to = b'\0' * 8
         r = b''
         o = b'\0' * 8
-        for i in range(0, len(v), 8):
-            o = xor(v[i:i + 8], tr)
+        for i in range(0, len(text), 8):
+            o = xor(text[i:i + 8], tr)
             tr = xor(tea_code(o, self.secret_key), to)
             to = o
             r += tr

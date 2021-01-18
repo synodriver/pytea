@@ -17,6 +17,7 @@ typedef unsigned short TEA_U16;
 typedef signed short   TEA_S16;
 typedef unsigned int   TEA_U32;
 typedef signed int     TEA_S32;
+typedef unsigned long long TEA_U64;
 
 #define TEA_NULL    ((void *)0)
 /******************************************************************************
