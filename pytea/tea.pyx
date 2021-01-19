@@ -1,4 +1,6 @@
 # cython: language_level=3
+from libc.stdlib cimport malloc, free
+from libc.string cimport memcpy
 from pytea cimport tea
 
 cdef tea.TEA_U8*conv(tea.TEA_U8*data, int size):
@@ -22,18 +24,22 @@ cdef void atoi(tea.TEA_U8*data, int size):
         conv(data + i, 4)
 
 cdef class TEA:
-    """TEA加密的py绑定 secret_key实例化以后就确定了,再更改是没用的"""
+    """TEA加密的py绑定"""
     cdef char _secret_key[16]
     cdef int _encrypt_times
 
     def __init__(self, bytes secret_key, int encrypt_times=16):  # bytes会被改变
         # k = struct.unpack('>LLLL', secret_key[0:16])
-        cdef tea.TEA_U8*temp_data = secret_key
+        cdef tea.TEA_U8*temp_data = <tea.TEA_U8*> malloc(16 * sizeof(tea.TEA_U8))
+        if not temp_data:
+            raise MemoryError("no enough memory")
+        memcpy(temp_data, <tea.TEA_U8*> secret_key, 16)
+        # cdef tea.TEA_U8*temp_data = secret_key
         atoi(temp_data, 16)
         cdef tea.TEA_U8 i
         for i in range(4):
             (<tea.TEA_U32*> self._secret_key)[i] = (<tea.TEA_U32*> temp_data)[i]
-
+        free(temp_data)
         self._encrypt_times = encrypt_times
         cdef tea.TEA_ErrorCode_t flag = tea.TEA_Config128bitsKey(<tea.TEA_U8*> self._secret_key)
         if flag != tea.TEA_SUCCESS:
@@ -55,16 +61,21 @@ cdef class TEA:
         cdef tea.TEA_U8 i = 0
         for i in range(4):
             key[i] = (<tea.TEA_U32*> self._secret_key)[i]
-        atoi(<tea.TEA_U8*>key,16)
-        return <bytes>(<tea.TEA_U8*>key)[0:16]
+        atoi(<tea.TEA_U8*> key, 16)
+        return <bytes> (<tea.TEA_U8*> key)[0:16]
 
     @secret_key.setter
     def secret_key(self, bytes value):
-        cdef tea.TEA_U8*temp_data = value
+        cdef tea.TEA_U8* temp_data = <tea.TEA_U8*> malloc(16 * sizeof(tea.TEA_U8))
+        if not temp_data:
+            raise MemoryError("no enough memory")
+        memcpy(temp_data, <tea.TEA_U8*> value, 16)
         atoi(temp_data, 16)
-        cdef int i
+
+        cdef tea.TEA_U8 i
         for i in range(4):
             (<tea.TEA_U32*> self._secret_key)[i] = (<tea.TEA_U32*> temp_data)[i]
+        free(temp_data)
         cdef tea.TEA_ErrorCode_t flag = tea.TEA_Config128bitsKey(<tea.TEA_U8*> self._secret_key)
         if flag != tea.TEA_SUCCESS:
             raise Exception("set key wrong")
@@ -75,7 +86,10 @@ cdef class TEA:
         :param text: 8字节 bytes
         :return: 
         """
-        cdef tea.TEA_U8*temp_data = text
+        cdef tea.TEA_U8*temp_data = <tea.TEA_U8*> malloc(8 * sizeof(tea.TEA_U8))
+        if not temp_data:
+            raise MemoryError("no enough memory")
+        memcpy(temp_data, <tea.TEA_U8*> text, 8)
         atoi(temp_data, 8)  # 没4个字节切换一次顺序
 
         cdef int flag = tea.TEA_EncryptGroup(<tea.TEA_U32 *> temp_data, <tea.TEA_U32 *> self._secret_key)
@@ -90,14 +104,17 @@ cdef class TEA:
         :param text: 
         :return: 
         """
-        cdef tea.TEA_U8*temp_data = text
+        cdef tea.TEA_U8*temp_data = <tea.TEA_U8*> malloc(8 * sizeof(tea.TEA_U8))
+        if not temp_data:
+            raise MemoryError("no enough memory")
+        memcpy(temp_data, <tea.TEA_U8*> text, 8)
         atoi(temp_data, 8)  # 没4个字节切换一次顺序
 
         cdef int flag = tea.TEA_DecryptGroup(<tea.TEA_U32 *> temp_data, <tea.TEA_U32 *> self._secret_key)
         if flag != tea.TEA_SUCCESS:
             raise Exception("sth wrong")
         atoi(temp_data, 8)
-        return <bytes> temp_data[0:8]  # TODO 去掉struct
+        return <bytes> temp_data[0:8]
 
     cpdef encrypt(self, bytes text):
         """
@@ -110,8 +127,12 @@ cdef class TEA:
         fill_n_or = (n - 2) | 0xF8  # 然后在填充字符前部插入1字节, 值为 ((n - 2)|0xF8) 以便标记填充字符的个数.
         text = bytes([fill_n_or]) + bytes([220]) * n + text + b'\x00' * 7  # 填充
 
-        cdef tea.TEA_U8*temp_data = text  # 传进去字节序又变了
-        atoi(temp_data, len(text))  # 转换字节序 事实证明这一步走对了
+        cdef int l = len(text)
+        cdef tea.TEA_U8*temp_data = <tea.TEA_U8*> malloc(l * sizeof(tea.TEA_U8))
+        if not temp_data:
+            raise MemoryError("no enough memory")
+        memcpy(temp_data, <tea.TEA_U8*> text, l)
+        atoi(temp_data, l)  # 转换字节序 事实证明这一步走对了
 
         cdef tea.TEA_ErrorCode_t flag = tea.TEA_Encrypt(<tea.TEA_U8*> temp_data, <tea.TEA_U32> len(text))
         if flag == tea.TEA_ERROR:
@@ -134,7 +155,11 @@ cdef class TEA:
             raise ValueError("decrypt failed, len%8!=0")
 
         cdef tea.TEA_U8 tag = 0
-        cdef tea.TEA_U8*temp_data = text
+
+        cdef tea.TEA_U8*temp_data = <tea.TEA_U8*> malloc(l * sizeof(tea.TEA_U8))
+        if not temp_data:
+            raise MemoryError("no enough memory")
+        memcpy(temp_data, <tea.TEA_U8*> text, l)
         atoi(temp_data, l)
 
         cdef tea.TEA_ErrorCode_t flag = tea.TEA_Decrypt(<tea.TEA_U8*> temp_data, <tea.TEA_U32> l, &tag)

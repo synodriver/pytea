@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import timeit
+from copy import deepcopy
 
 from pytea import PYTEA
 from pytea import TEA
@@ -15,21 +15,21 @@ if __name__ == '__main__':
         xlsx https://t.me/mikuri520/670
         SQL https://t.me/mikuri520/671'''
     QQ = PYTEA(secret_key)
-    CQQ = TEA(secret_key)
+    CQQ = TEA(deepcopy(secret_key))
 
     enc = QQ.encrypt(plaintext.encode())
 
     start = time.time()
-    # for i in range(10000):
-    #     # plaintext = bytes(plaintext, encoding="utf-8")
-    #     # print("".join(["%02x" % i for i in enc]))
-    #     dec = QQ.decrypt(enc)
-    #     # print(dec.decode())
-    # print(f"py耗时{time.time() - start}")
-    # start = time.time()
+    for i in range(10000):
+        # plaintext = bytes(plaintext, encoding="utf-8")
+        # print("".join(["%02x" % i for i in enc]))
+        dec = QQ.decrypt(enc)
+        # print(dec.decode())
+    print(f"py耗时{time.time() - start}")
+    start = time.time()
     for i in range(10000):
         # plaintext = bytes(plaintext, encoding="utf-8")
         # print("".join(["%02x" % i for i in enc]))
         dec = CQQ.decrypt(enc)
-        print(dec.decode())
+        # print(dec.decode())
     print(f"c耗时{time.time() - start}")
