@@ -24,7 +24,7 @@ TEA_ErrorCode_t TEA_EncryptGroup(TEA_U32 *text, TEA_U32 *key) // 传入8字节�
     TEA_U32 sum = 0, v0 = text[0], v1 = text[1]; // 2个4字节数据 要进行加密的数据 todo v1 v2字节序有问题
     TEA_U32 k0 = key[0], k1 = key[1], k2 = key[2], k3 = key[3]; // 4个key,每个4字节 todo key 字节序有问题
     TEA_U8 i = 0;
-    printf("inside TEA_EncryptGroup  v0 %u v1 %u\n",v0,v1); //todo del
+//    printf("inside TEA_EncryptGroup  v0 %u v1 %u\n",v0,v1); //todo del
 
     if(text == TEA_NULL || key == TEA_NULL)
     {
@@ -39,7 +39,7 @@ TEA_ErrorCode_t TEA_EncryptGroup(TEA_U32 *text, TEA_U32 *key) // 传入8字节�
     }
     text[0] = v0;
     text[1] = v1;
-    printf("inside  TEA_EncryptGroup after jiami  v0 %u v1 %u\n",v0,v1); //todo del
+//    printf("inside  TEA_EncryptGroup after jiami  v0 %u v1 %u\n",v0,v1); //todo del
     return TEA_SUCCESS;
 }
 
@@ -108,7 +108,7 @@ TEA_ErrorCode_t TEA_Encrypt(TEA_U8 *text, TEA_U32 size)
     TEA_U64 to = 0;
     TEA_U64 o = 0;
     TEA_U64 o_temp = 0;
-    printf("outside v0 %u v1 %u\n",((TEA_U32 *)text)[0],((TEA_U32 *)text)[1]); //todo del  前处理没有生效
+//    printf("outside v0 %u v1 %u\n",((TEA_U32 *)text)[0],((TEA_U32 *)text)[1]); //todo del  前处理没有生效
     for(i = 0;i < number;i++)  // 8字节是一组 number组
     {
         o = ((TEA_U64*) text)[i] ^ tr; //  第一次xor  8字节与tr异或 todo 抄pytea.py line75
@@ -116,8 +116,8 @@ TEA_ErrorCode_t TEA_Encrypt(TEA_U8 *text, TEA_U32 size)
         o_temp = o;
         TEA_EncryptGroup((TEA_U32 *)(&o_temp), (TEA_U32 *)gTEA_KeyBuf); //!! 这里传指针出了问题 o自己不能改变
         tr = o_temp ^ to;
-        printf("outside o_temp = %u %u\n",((TEA_U32 *)(&o_temp))[0],((TEA_U32 *)(&o_temp))[1]); // todo del 看看tr的值  !! 这里传指针出了问题
-        printf("outside tr = %u %u\n",((TEA_U32 *)(&tr))[0],((TEA_U32 *)(&tr))[1]);
+//        printf("outside o_temp = %u %u\n",((TEA_U32 *)(&o_temp))[0],((TEA_U32 *)(&o_temp))[1]); // todo del 看看tr的值  !! 这里传指针出了问题
+//        printf("outside tr = %u %u\n",((TEA_U32 *)(&tr))[0],((TEA_U32 *)(&tr))[1]);
         to = o;
         ((TEA_U64*) text)[i] = tr;
     }
