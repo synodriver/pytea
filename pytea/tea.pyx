@@ -18,7 +18,7 @@ cdef tea.TEA_U8*conv(tea.TEA_U8*data, int size):
         data[size - i - 1] = temp
     return data
 
-cdef void atoi(tea.TEA_U8*data, int size):
+cdef void ntohs(tea.TEA_U8*data, int size):
     cdef int i = 0
     for i in range(0, size, 4):
         conv(data + i, 4)
@@ -35,7 +35,7 @@ cdef class TEA:
             raise MemoryError("no enough memory")
         memcpy(temp_data, <tea.TEA_U8*> secret_key, 16)
         # cdef tea.TEA_U8*temp_data = secret_key
-        atoi(temp_data, 16)
+        ntohs(temp_data, 16)
         cdef tea.TEA_U8 i
         for i in range(4):
             (<tea.TEA_U32*> self._secret_key)[i] = (<tea.TEA_U32*> temp_data)[i]
@@ -61,7 +61,7 @@ cdef class TEA:
         cdef tea.TEA_U8 i = 0
         for i in range(4):
             key[i] = (<tea.TEA_U32*> self._secret_key)[i]
-        atoi(<tea.TEA_U8*> key, 16)
+        ntohs(<tea.TEA_U8*> key, 16)
         return <bytes> (<tea.TEA_U8*> key)[0:16]
 
     @secret_key.setter
@@ -70,7 +70,7 @@ cdef class TEA:
         if not temp_data:
             raise MemoryError("no enough memory")
         memcpy(temp_data, <tea.TEA_U8*> value, 16)
-        atoi(temp_data, 16)
+        ntohs(temp_data, 16)
 
         cdef tea.TEA_U8 i
         for i in range(4):
@@ -90,12 +90,12 @@ cdef class TEA:
         if not temp_data:
             raise MemoryError("no enough memory")
         memcpy(temp_data, <tea.TEA_U8*> text, 8)
-        atoi(temp_data, 8)  # 没4个字节切换一次顺序
+        ntohs(temp_data, 8)  # 没4个字节切换一次顺序
 
         cdef int flag = tea.TEA_EncryptGroup(<tea.TEA_U32 *> temp_data, <tea.TEA_U32 *> self._secret_key)
         if flag != tea.TEA_SUCCESS:
             raise Exception("sth wrong")
-        atoi(temp_data, 8)
+        ntohs(temp_data, 8)
         return <bytes> temp_data[0:8]  # 最后关头出问题
 
     cpdef bytes decrypt_group(self, bytes text):
@@ -108,12 +108,12 @@ cdef class TEA:
         if not temp_data:
             raise MemoryError("no enough memory")
         memcpy(temp_data, <tea.TEA_U8*> text, 8)
-        atoi(temp_data, 8)  # 没4个字节切换一次顺序
+        ntohs(temp_data, 8)  # 没4个字节切换一次顺序
 
         cdef int flag = tea.TEA_DecryptGroup(<tea.TEA_U32 *> temp_data, <tea.TEA_U32 *> self._secret_key)
         if flag != tea.TEA_SUCCESS:
             raise Exception("sth wrong")
-        atoi(temp_data, 8)
+        ntohs(temp_data, 8)
         return <bytes> temp_data[0:8]
 
     cpdef encrypt(self, bytes text):
@@ -132,7 +132,7 @@ cdef class TEA:
         if not temp_data:
             raise MemoryError("no enough memory")
         memcpy(temp_data, <tea.TEA_U8*> text, l)
-        atoi(temp_data, l)  # 转换字节序 事实证明这一步走对了
+        ntohs(temp_data, l)  # 转换字节序 事实证明这一步走对了
 
         cdef tea.TEA_ErrorCode_t flag = tea.TEA_Encrypt(<tea.TEA_U8*> temp_data, <tea.TEA_U32> len(text))
         if flag == tea.TEA_ERROR:
@@ -141,7 +141,7 @@ cdef class TEA:
             raise MemoryError("out of memory")
         elif flag == tea.TEA_OTHERS:
             raise Exception("sth wrong")
-        atoi(temp_data, len(text))
+        ntohs(temp_data, len(text))
         return <bytes> temp_data[0:len(text)]
 
     cpdef decrypt(self, bytes text):
@@ -160,7 +160,7 @@ cdef class TEA:
         if not temp_data:
             raise MemoryError("no enough memory")
         memcpy(temp_data, <tea.TEA_U8*> text, l)
-        atoi(temp_data, l)
+        ntohs(temp_data, l)
 
         cdef tea.TEA_ErrorCode_t flag = tea.TEA_Decrypt(<tea.TEA_U8*> temp_data, <tea.TEA_U32> l, &tag)
         if flag == tea.TEA_ERROR:
@@ -170,7 +170,7 @@ cdef class TEA:
         elif flag == tea.TEA_OTHERS:
             raise Exception("sth wrong")
 
-        atoi(temp_data, l)
+        ntohs(temp_data, l)
         # print(f"len {l}")
         data = <bytes> temp_data[0:l]
         # print(data)

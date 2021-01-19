@@ -1288,7 +1288,7 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_decrypt(CYTHON_UNUSED struct __pyx_obj
 /* Module declarations from 'pytea.tea' */
 static PyTypeObject *__pyx_ptype_5pytea_3tea_TEA = 0;
 static TEA_U8 *__pyx_f_5pytea_3tea_conv(TEA_U8 *, int); /*proto*/
-static void __pyx_f_5pytea_3tea_atoi(TEA_U8 *, int); /*proto*/
+static void __pyx_f_5pytea_3tea_ntohs(TEA_U8 *, int); /*proto*/
 static PyObject *__pyx_f_5pytea_3tea___pyx_unpickle_TEA__set_state(struct __pyx_obj_5pytea_3tea_TEA *, PyObject *); /*proto*/
 static int __Pyx_carray_from_py_char(PyObject *, char *, Py_ssize_t); /*proto*/
 #define __Pyx_MODULE_NAME "pytea.tea"
@@ -1502,7 +1502,7 @@ static TEA_U8 *__pyx_f_5pytea_3tea_conv(TEA_U8 *__pyx_v_data, int __pyx_v_size) 
  *         data[size - i - 1] = temp
  *     return data             # <<<<<<<<<<<<<<
  * 
- * cdef void atoi(tea.TEA_U8*data, int size):
+ * cdef void ntohs(tea.TEA_U8*data, int size):
  */
   __pyx_r = __pyx_v_data;
   goto __pyx_L0;
@@ -1524,22 +1524,22 @@ static TEA_U8 *__pyx_f_5pytea_3tea_conv(TEA_U8 *__pyx_v_data, int __pyx_v_size) 
 /* "pytea/tea.pyx":21
  *     return data
  * 
- * cdef void atoi(tea.TEA_U8*data, int size):             # <<<<<<<<<<<<<<
+ * cdef void ntohs(tea.TEA_U8*data, int size):             # <<<<<<<<<<<<<<
  *     cdef int i = 0
  *     for i in range(0, size, 4):
  */
 
-static void __pyx_f_5pytea_3tea_atoi(TEA_U8 *__pyx_v_data, int __pyx_v_size) {
+static void __pyx_f_5pytea_3tea_ntohs(TEA_U8 *__pyx_v_data, int __pyx_v_size) {
   int __pyx_v_i;
   __Pyx_RefNannyDeclarations
   int __pyx_t_1;
   int __pyx_t_2;
   int __pyx_t_3;
-  __Pyx_RefNannySetupContext("atoi", 0);
+  __Pyx_RefNannySetupContext("ntohs", 0);
 
   /* "pytea/tea.pyx":22
  * 
- * cdef void atoi(tea.TEA_U8*data, int size):
+ * cdef void ntohs(tea.TEA_U8*data, int size):
  *     cdef int i = 0             # <<<<<<<<<<<<<<
  *     for i in range(0, size, 4):
  *         conv(data + i, 4)
@@ -1547,7 +1547,7 @@ static void __pyx_f_5pytea_3tea_atoi(TEA_U8 *__pyx_v_data, int __pyx_v_size) {
   __pyx_v_i = 0;
 
   /* "pytea/tea.pyx":23
- * cdef void atoi(tea.TEA_U8*data, int size):
+ * cdef void ntohs(tea.TEA_U8*data, int size):
  *     cdef int i = 0
  *     for i in range(0, size, 4):             # <<<<<<<<<<<<<<
  *         conv(data + i, 4)
@@ -1571,7 +1571,7 @@ static void __pyx_f_5pytea_3tea_atoi(TEA_U8 *__pyx_v_data, int __pyx_v_size) {
   /* "pytea/tea.pyx":21
  *     return data
  * 
- * cdef void atoi(tea.TEA_U8*data, int size):             # <<<<<<<<<<<<<<
+ * cdef void ntohs(tea.TEA_U8*data, int size):             # <<<<<<<<<<<<<<
  *     cdef int i = 0
  *     for i in range(0, size, 4):
  */
@@ -1725,7 +1725,7 @@ static int __pyx_pf_5pytea_3tea_3TEA___init__(struct __pyx_obj_5pytea_3tea_TEA *
  *             raise MemoryError("no enough memory")
  *         memcpy(temp_data, <tea.TEA_U8*> secret_key, 16)             # <<<<<<<<<<<<<<
  *         # cdef tea.TEA_U8*temp_data = secret_key
- *         atoi(temp_data, 16)
+ *         ntohs(temp_data, 16)
  */
   if (unlikely(__pyx_v_secret_key == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "expected bytes, NoneType found");
@@ -1737,14 +1737,14 @@ static int __pyx_pf_5pytea_3tea_3TEA___init__(struct __pyx_obj_5pytea_3tea_TEA *
   /* "pytea/tea.pyx":38
  *         memcpy(temp_data, <tea.TEA_U8*> secret_key, 16)
  *         # cdef tea.TEA_U8*temp_data = secret_key
- *         atoi(temp_data, 16)             # <<<<<<<<<<<<<<
+ *         ntohs(temp_data, 16)             # <<<<<<<<<<<<<<
  *         cdef tea.TEA_U8 i
  *         for i in range(4):
  */
-  __pyx_f_5pytea_3tea_atoi(__pyx_v_temp_data, 16);
+  __pyx_f_5pytea_3tea_ntohs(__pyx_v_temp_data, 16);
 
   /* "pytea/tea.pyx":40
- *         atoi(temp_data, 16)
+ *         ntohs(temp_data, 16)
  *         cdef tea.TEA_U8 i
  *         for i in range(4):             # <<<<<<<<<<<<<<
  *             (<tea.TEA_U32*> self._secret_key)[i] = (<tea.TEA_U32*> temp_data)[i]
@@ -2032,7 +2032,7 @@ static PyObject *__pyx_pf_5pytea_3tea_3TEA_10secret_key___get__(struct __pyx_obj
  *         cdef tea.TEA_U8 i = 0
  *         for i in range(4):             # <<<<<<<<<<<<<<
  *             key[i] = (<tea.TEA_U32*> self._secret_key)[i]
- *         atoi(<tea.TEA_U8*> key, 16)
+ *         ntohs(<tea.TEA_U8*> key, 16)
  */
   for (__pyx_t_1 = 0; __pyx_t_1 < 4; __pyx_t_1+=1) {
     __pyx_v_i = __pyx_t_1;
@@ -2041,7 +2041,7 @@ static PyObject *__pyx_pf_5pytea_3tea_3TEA_10secret_key___get__(struct __pyx_obj
  *         cdef tea.TEA_U8 i = 0
  *         for i in range(4):
  *             key[i] = (<tea.TEA_U32*> self._secret_key)[i]             # <<<<<<<<<<<<<<
- *         atoi(<tea.TEA_U8*> key, 16)
+ *         ntohs(<tea.TEA_U8*> key, 16)
  *         return <bytes> (<tea.TEA_U8*> key)[0:16]
  */
     (__pyx_v_key[__pyx_v_i]) = (((TEA_U32 *)__pyx_v_self->_secret_key)[__pyx_v_i]);
@@ -2050,15 +2050,15 @@ static PyObject *__pyx_pf_5pytea_3tea_3TEA_10secret_key___get__(struct __pyx_obj
   /* "pytea/tea.pyx":64
  *         for i in range(4):
  *             key[i] = (<tea.TEA_U32*> self._secret_key)[i]
- *         atoi(<tea.TEA_U8*> key, 16)             # <<<<<<<<<<<<<<
+ *         ntohs(<tea.TEA_U8*> key, 16)             # <<<<<<<<<<<<<<
  *         return <bytes> (<tea.TEA_U8*> key)[0:16]
  * 
  */
-  __pyx_f_5pytea_3tea_atoi(((TEA_U8 *)__pyx_v_key), 16);
+  __pyx_f_5pytea_3tea_ntohs(((TEA_U8 *)__pyx_v_key), 16);
 
   /* "pytea/tea.pyx":65
  *             key[i] = (<tea.TEA_U32*> self._secret_key)[i]
- *         atoi(<tea.TEA_U8*> key, 16)
+ *         ntohs(<tea.TEA_U8*> key, 16)
  *         return <bytes> (<tea.TEA_U8*> key)[0:16]             # <<<<<<<<<<<<<<
  * 
  *     @secret_key.setter
@@ -2158,7 +2158,7 @@ static int __pyx_pf_5pytea_3tea_3TEA_10secret_key_2__set__(struct __pyx_obj_5pyt
  *         if not temp_data:
  *             raise MemoryError("no enough memory")             # <<<<<<<<<<<<<<
  *         memcpy(temp_data, <tea.TEA_U8*> value, 16)
- *         atoi(temp_data, 16)
+ *         ntohs(temp_data, 16)
  */
     __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 71, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
@@ -2179,7 +2179,7 @@ static int __pyx_pf_5pytea_3tea_3TEA_10secret_key_2__set__(struct __pyx_obj_5pyt
  *         if not temp_data:
  *             raise MemoryError("no enough memory")
  *         memcpy(temp_data, <tea.TEA_U8*> value, 16)             # <<<<<<<<<<<<<<
- *         atoi(temp_data, 16)
+ *         ntohs(temp_data, 16)
  * 
  */
   if (unlikely(__pyx_v_value == Py_None)) {
@@ -2192,11 +2192,11 @@ static int __pyx_pf_5pytea_3tea_3TEA_10secret_key_2__set__(struct __pyx_obj_5pyt
   /* "pytea/tea.pyx":73
  *             raise MemoryError("no enough memory")
  *         memcpy(temp_data, <tea.TEA_U8*> value, 16)
- *         atoi(temp_data, 16)             # <<<<<<<<<<<<<<
+ *         ntohs(temp_data, 16)             # <<<<<<<<<<<<<<
  * 
  *         cdef tea.TEA_U8 i
  */
-  __pyx_f_5pytea_3tea_atoi(__pyx_v_temp_data, 16);
+  __pyx_f_5pytea_3tea_ntohs(__pyx_v_temp_data, 16);
 
   /* "pytea/tea.pyx":76
  * 
@@ -2384,7 +2384,7 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_encrypt_group(struct __pyx_obj_5pytea_
  *         if not temp_data:
  *             raise MemoryError("no enough memory")             # <<<<<<<<<<<<<<
  *         memcpy(temp_data, <tea.TEA_U8*> text, 8)
- *         atoi(temp_data, 8)  # 4
+ *         ntohs(temp_data, 8)  # 4
  */
     __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 91, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
@@ -2405,7 +2405,7 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_encrypt_group(struct __pyx_obj_5pytea_
  *         if not temp_data:
  *             raise MemoryError("no enough memory")
  *         memcpy(temp_data, <tea.TEA_U8*> text, 8)             # <<<<<<<<<<<<<<
- *         atoi(temp_data, 8)  # 4
+ *         ntohs(temp_data, 8)  # 4
  * 
  */
   if (unlikely(__pyx_v_text == Py_None)) {
@@ -2418,14 +2418,14 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_encrypt_group(struct __pyx_obj_5pytea_
   /* "pytea/tea.pyx":93
  *             raise MemoryError("no enough memory")
  *         memcpy(temp_data, <tea.TEA_U8*> text, 8)
- *         atoi(temp_data, 8)  # 4             # <<<<<<<<<<<<<<
+ *         ntohs(temp_data, 8)  # 4             # <<<<<<<<<<<<<<
  * 
  *         cdef int flag = tea.TEA_EncryptGroup(<tea.TEA_U32 *> temp_data, <tea.TEA_U32 *> self._secret_key)
  */
-  __pyx_f_5pytea_3tea_atoi(__pyx_v_temp_data, 8);
+  __pyx_f_5pytea_3tea_ntohs(__pyx_v_temp_data, 8);
 
   /* "pytea/tea.pyx":95
- *         atoi(temp_data, 8)  # 4
+ *         ntohs(temp_data, 8)  # 4
  * 
  *         cdef int flag = tea.TEA_EncryptGroup(<tea.TEA_U32 *> temp_data, <tea.TEA_U32 *> self._secret_key)             # <<<<<<<<<<<<<<
  *         if flag != tea.TEA_SUCCESS:
@@ -2438,7 +2438,7 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_encrypt_group(struct __pyx_obj_5pytea_
  *         cdef int flag = tea.TEA_EncryptGroup(<tea.TEA_U32 *> temp_data, <tea.TEA_U32 *> self._secret_key)
  *         if flag != tea.TEA_SUCCESS:             # <<<<<<<<<<<<<<
  *             raise Exception("sth wrong")
- *         atoi(temp_data, 8)
+ *         ntohs(temp_data, 8)
  */
   __pyx_t_5 = ((__pyx_v_flag != TEA_SUCCESS) != 0);
   if (unlikely(__pyx_t_5)) {
@@ -2447,7 +2447,7 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_encrypt_group(struct __pyx_obj_5pytea_
  *         cdef int flag = tea.TEA_EncryptGroup(<tea.TEA_U32 *> temp_data, <tea.TEA_U32 *> self._secret_key)
  *         if flag != tea.TEA_SUCCESS:
  *             raise Exception("sth wrong")             # <<<<<<<<<<<<<<
- *         atoi(temp_data, 8)
+ *         ntohs(temp_data, 8)
  *         return <bytes> temp_data[0:8]  #
  */
     __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])), __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 97, __pyx_L1_error)
@@ -2461,22 +2461,22 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_encrypt_group(struct __pyx_obj_5pytea_
  *         cdef int flag = tea.TEA_EncryptGroup(<tea.TEA_U32 *> temp_data, <tea.TEA_U32 *> self._secret_key)
  *         if flag != tea.TEA_SUCCESS:             # <<<<<<<<<<<<<<
  *             raise Exception("sth wrong")
- *         atoi(temp_data, 8)
+ *         ntohs(temp_data, 8)
  */
   }
 
   /* "pytea/tea.pyx":98
  *         if flag != tea.TEA_SUCCESS:
  *             raise Exception("sth wrong")
- *         atoi(temp_data, 8)             # <<<<<<<<<<<<<<
+ *         ntohs(temp_data, 8)             # <<<<<<<<<<<<<<
  *         return <bytes> temp_data[0:8]  #
  * 
  */
-  __pyx_f_5pytea_3tea_atoi(__pyx_v_temp_data, 8);
+  __pyx_f_5pytea_3tea_ntohs(__pyx_v_temp_data, 8);
 
   /* "pytea/tea.pyx":99
  *             raise Exception("sth wrong")
- *         atoi(temp_data, 8)
+ *         ntohs(temp_data, 8)
  *         return <bytes> temp_data[0:8]  #             # <<<<<<<<<<<<<<
  * 
  *     cpdef bytes decrypt_group(self, bytes text):
@@ -2655,7 +2655,7 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_decrypt_group(struct __pyx_obj_5pytea_
  *         if not temp_data:
  *             raise MemoryError("no enough memory")             # <<<<<<<<<<<<<<
  *         memcpy(temp_data, <tea.TEA_U8*> text, 8)
- *         atoi(temp_data, 8)  # 4
+ *         ntohs(temp_data, 8)  # 4
  */
     __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 109, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
@@ -2676,7 +2676,7 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_decrypt_group(struct __pyx_obj_5pytea_
  *         if not temp_data:
  *             raise MemoryError("no enough memory")
  *         memcpy(temp_data, <tea.TEA_U8*> text, 8)             # <<<<<<<<<<<<<<
- *         atoi(temp_data, 8)  # 4
+ *         ntohs(temp_data, 8)  # 4
  * 
  */
   if (unlikely(__pyx_v_text == Py_None)) {
@@ -2689,14 +2689,14 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_decrypt_group(struct __pyx_obj_5pytea_
   /* "pytea/tea.pyx":111
  *             raise MemoryError("no enough memory")
  *         memcpy(temp_data, <tea.TEA_U8*> text, 8)
- *         atoi(temp_data, 8)  # 4             # <<<<<<<<<<<<<<
+ *         ntohs(temp_data, 8)  # 4             # <<<<<<<<<<<<<<
  * 
  *         cdef int flag = tea.TEA_DecryptGroup(<tea.TEA_U32 *> temp_data, <tea.TEA_U32 *> self._secret_key)
  */
-  __pyx_f_5pytea_3tea_atoi(__pyx_v_temp_data, 8);
+  __pyx_f_5pytea_3tea_ntohs(__pyx_v_temp_data, 8);
 
   /* "pytea/tea.pyx":113
- *         atoi(temp_data, 8)  # 4
+ *         ntohs(temp_data, 8)  # 4
  * 
  *         cdef int flag = tea.TEA_DecryptGroup(<tea.TEA_U32 *> temp_data, <tea.TEA_U32 *> self._secret_key)             # <<<<<<<<<<<<<<
  *         if flag != tea.TEA_SUCCESS:
@@ -2709,7 +2709,7 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_decrypt_group(struct __pyx_obj_5pytea_
  *         cdef int flag = tea.TEA_DecryptGroup(<tea.TEA_U32 *> temp_data, <tea.TEA_U32 *> self._secret_key)
  *         if flag != tea.TEA_SUCCESS:             # <<<<<<<<<<<<<<
  *             raise Exception("sth wrong")
- *         atoi(temp_data, 8)
+ *         ntohs(temp_data, 8)
  */
   __pyx_t_5 = ((__pyx_v_flag != TEA_SUCCESS) != 0);
   if (unlikely(__pyx_t_5)) {
@@ -2718,7 +2718,7 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_decrypt_group(struct __pyx_obj_5pytea_
  *         cdef int flag = tea.TEA_DecryptGroup(<tea.TEA_U32 *> temp_data, <tea.TEA_U32 *> self._secret_key)
  *         if flag != tea.TEA_SUCCESS:
  *             raise Exception("sth wrong")             # <<<<<<<<<<<<<<
- *         atoi(temp_data, 8)
+ *         ntohs(temp_data, 8)
  *         return <bytes> temp_data[0:8]
  */
     __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])), __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 115, __pyx_L1_error)
@@ -2732,22 +2732,22 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_decrypt_group(struct __pyx_obj_5pytea_
  *         cdef int flag = tea.TEA_DecryptGroup(<tea.TEA_U32 *> temp_data, <tea.TEA_U32 *> self._secret_key)
  *         if flag != tea.TEA_SUCCESS:             # <<<<<<<<<<<<<<
  *             raise Exception("sth wrong")
- *         atoi(temp_data, 8)
+ *         ntohs(temp_data, 8)
  */
   }
 
   /* "pytea/tea.pyx":116
  *         if flag != tea.TEA_SUCCESS:
  *             raise Exception("sth wrong")
- *         atoi(temp_data, 8)             # <<<<<<<<<<<<<<
+ *         ntohs(temp_data, 8)             # <<<<<<<<<<<<<<
  *         return <bytes> temp_data[0:8]
  * 
  */
-  __pyx_f_5pytea_3tea_atoi(__pyx_v_temp_data, 8);
+  __pyx_f_5pytea_3tea_ntohs(__pyx_v_temp_data, 8);
 
   /* "pytea/tea.pyx":117
  *             raise Exception("sth wrong")
- *         atoi(temp_data, 8)
+ *         ntohs(temp_data, 8)
  *         return <bytes> temp_data[0:8]             # <<<<<<<<<<<<<<
  * 
  *     cpdef encrypt(self, bytes text):
@@ -3016,7 +3016,7 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_encrypt(CYTHON_UNUSED struct __pyx_obj
  *         if not temp_data:
  *             raise MemoryError("no enough memory")             # <<<<<<<<<<<<<<
  *         memcpy(temp_data, <tea.TEA_U8*> text, l)
- *         atoi(temp_data, l)  #
+ *         ntohs(temp_data, l)  #
  */
     __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 133, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
@@ -3037,7 +3037,7 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_encrypt(CYTHON_UNUSED struct __pyx_obj
  *         if not temp_data:
  *             raise MemoryError("no enough memory")
  *         memcpy(temp_data, <tea.TEA_U8*> text, l)             # <<<<<<<<<<<<<<
- *         atoi(temp_data, l)  #
+ *         ntohs(temp_data, l)  #
  * 
  */
   if (unlikely(__pyx_v_text == Py_None)) {
@@ -3050,14 +3050,14 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_encrypt(CYTHON_UNUSED struct __pyx_obj
   /* "pytea/tea.pyx":135
  *             raise MemoryError("no enough memory")
  *         memcpy(temp_data, <tea.TEA_U8*> text, l)
- *         atoi(temp_data, l)  #             # <<<<<<<<<<<<<<
+ *         ntohs(temp_data, l)  #             # <<<<<<<<<<<<<<
  * 
  *         cdef tea.TEA_ErrorCode_t flag = tea.TEA_Encrypt(<tea.TEA_U8*> temp_data, <tea.TEA_U32> len(text))
  */
-  __pyx_f_5pytea_3tea_atoi(__pyx_v_temp_data, __pyx_v_l);
+  __pyx_f_5pytea_3tea_ntohs(__pyx_v_temp_data, __pyx_v_l);
 
   /* "pytea/tea.pyx":137
- *         atoi(temp_data, l)  #
+ *         ntohs(temp_data, l)  #
  * 
  *         cdef tea.TEA_ErrorCode_t flag = tea.TEA_Encrypt(<tea.TEA_U8*> temp_data, <tea.TEA_U32> len(text))             # <<<<<<<<<<<<<<
  *         if flag == tea.TEA_ERROR:
@@ -3130,7 +3130,7 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_encrypt(CYTHON_UNUSED struct __pyx_obj
  *             raise MemoryError("out of memory")
  *         elif flag == tea.TEA_OTHERS:
  *             raise Exception("sth wrong")             # <<<<<<<<<<<<<<
- *         atoi(temp_data, len(text))
+ *         ntohs(temp_data, len(text))
  *         return <bytes> temp_data[0:len(text)]
  */
     __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])), __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 143, __pyx_L1_error)
@@ -3144,7 +3144,7 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_encrypt(CYTHON_UNUSED struct __pyx_obj
  *             raise MemoryError("out of memory")
  *         elif flag == tea.TEA_OTHERS:             # <<<<<<<<<<<<<<
  *             raise Exception("sth wrong")
- *         atoi(temp_data, len(text))
+ *         ntohs(temp_data, len(text))
  */
     break;
     default: break;
@@ -3153,7 +3153,7 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_encrypt(CYTHON_UNUSED struct __pyx_obj
   /* "pytea/tea.pyx":144
  *         elif flag == tea.TEA_OTHERS:
  *             raise Exception("sth wrong")
- *         atoi(temp_data, len(text))             # <<<<<<<<<<<<<<
+ *         ntohs(temp_data, len(text))             # <<<<<<<<<<<<<<
  *         return <bytes> temp_data[0:len(text)]
  * 
  */
@@ -3162,11 +3162,11 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_encrypt(CYTHON_UNUSED struct __pyx_obj
     __PYX_ERR(0, 144, __pyx_L1_error)
   }
   __pyx_t_5 = PyBytes_GET_SIZE(__pyx_v_text); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 144, __pyx_L1_error)
-  __pyx_f_5pytea_3tea_atoi(__pyx_v_temp_data, __pyx_t_5);
+  __pyx_f_5pytea_3tea_ntohs(__pyx_v_temp_data, __pyx_t_5);
 
   /* "pytea/tea.pyx":145
  *             raise Exception("sth wrong")
- *         atoi(temp_data, len(text))
+ *         ntohs(temp_data, len(text))
  *         return <bytes> temp_data[0:len(text)]             # <<<<<<<<<<<<<<
  * 
  *     cpdef decrypt(self, bytes text):
@@ -3420,7 +3420,7 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_decrypt(CYTHON_UNUSED struct __pyx_obj
  *         if not temp_data:
  *             raise MemoryError("no enough memory")             # <<<<<<<<<<<<<<
  *         memcpy(temp_data, <tea.TEA_U8*> text, l)
- *         atoi(temp_data, l)
+ *         ntohs(temp_data, l)
  */
     __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 161, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
@@ -3441,7 +3441,7 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_decrypt(CYTHON_UNUSED struct __pyx_obj
  *         if not temp_data:
  *             raise MemoryError("no enough memory")
  *         memcpy(temp_data, <tea.TEA_U8*> text, l)             # <<<<<<<<<<<<<<
- *         atoi(temp_data, l)
+ *         ntohs(temp_data, l)
  * 
  */
   if (unlikely(__pyx_v_text == Py_None)) {
@@ -3454,14 +3454,14 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_decrypt(CYTHON_UNUSED struct __pyx_obj
   /* "pytea/tea.pyx":163
  *             raise MemoryError("no enough memory")
  *         memcpy(temp_data, <tea.TEA_U8*> text, l)
- *         atoi(temp_data, l)             # <<<<<<<<<<<<<<
+ *         ntohs(temp_data, l)             # <<<<<<<<<<<<<<
  * 
  *         cdef tea.TEA_ErrorCode_t flag = tea.TEA_Decrypt(<tea.TEA_U8*> temp_data, <tea.TEA_U32> l, &tag)
  */
-  __pyx_f_5pytea_3tea_atoi(__pyx_v_temp_data, __pyx_v_l);
+  __pyx_f_5pytea_3tea_ntohs(__pyx_v_temp_data, __pyx_v_l);
 
   /* "pytea/tea.pyx":165
- *         atoi(temp_data, l)
+ *         ntohs(temp_data, l)
  * 
  *         cdef tea.TEA_ErrorCode_t flag = tea.TEA_Decrypt(<tea.TEA_U8*> temp_data, <tea.TEA_U32> l, &tag)             # <<<<<<<<<<<<<<
  *         if flag == tea.TEA_ERROR:
@@ -3530,7 +3530,7 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_decrypt(CYTHON_UNUSED struct __pyx_obj
  *         elif flag == tea.TEA_OTHERS:
  *             raise Exception("sth wrong")             # <<<<<<<<<<<<<<
  * 
- *         atoi(temp_data, l)
+ *         ntohs(temp_data, l)
  */
     __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])), __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 171, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
@@ -3552,14 +3552,14 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_decrypt(CYTHON_UNUSED struct __pyx_obj
   /* "pytea/tea.pyx":173
  *             raise Exception("sth wrong")
  * 
- *         atoi(temp_data, l)             # <<<<<<<<<<<<<<
+ *         ntohs(temp_data, l)             # <<<<<<<<<<<<<<
  *         # print(f"len {l}")
  *         data = <bytes> temp_data[0:l]
  */
-  __pyx_f_5pytea_3tea_atoi(__pyx_v_temp_data, __pyx_v_l);
+  __pyx_f_5pytea_3tea_ntohs(__pyx_v_temp_data, __pyx_v_l);
 
   /* "pytea/tea.pyx":175
- *         atoi(temp_data, l)
+ *         ntohs(temp_data, l)
  *         # print(f"len {l}")
  *         data = <bytes> temp_data[0:l]             # <<<<<<<<<<<<<<
  *         # print(data)
@@ -5010,7 +5010,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *         cdef int flag = tea.TEA_EncryptGroup(<tea.TEA_U32 *> temp_data, <tea.TEA_U32 *> self._secret_key)
  *         if flag != tea.TEA_SUCCESS:
  *             raise Exception("sth wrong")             # <<<<<<<<<<<<<<
- *         atoi(temp_data, 8)
+ *         ntohs(temp_data, 8)
  *         return <bytes> temp_data[0:8]  #
  */
   __pyx_tuple__3 = PyTuple_Pack(1, __pyx_kp_u_sth_wrong); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 97, __pyx_L1_error)
