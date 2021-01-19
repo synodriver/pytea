@@ -76,6 +76,13 @@ SQL https://t.me/mikuri520/671''')
 
         self.assertEqual(data_c, data_py)
 
+    def test_loginpack(self):
+        ctea = TEA(bytes(16))
+        with open("data.txt") as f:
+            data = f.read().strip()
+        ans = ctea.decrypt(bytes.fromhex(data))
+
+
 
 if __name__ == "__main__":
     unittest.main()
