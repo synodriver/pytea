@@ -10,7 +10,17 @@ class TestC(unittest.TestCase):
         self.secret_key = bytes.fromhex('11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 22')
         self.pytea = PYTEA(bytes.fromhex('11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 22'))
         self.ctea = TEA(bytes.fromhex('11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 22'))
-        pass
+
+    def test_encode_long(self):
+        test_data = '''下载地址：
+mega：https://mega.nz/folder/8SQUQDDA#B_pUPBIvCcfc2u4gpJvPyA
+Telegram Channel：
+csv https://t.me/mikuri520/669
+xlsx https://t.me/mikuri520/670
+SQL https://t.me/mikuri520/671'''
+        pytea = PYTEA(bytes.fromhex('11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11'))
+        ctea = TEA(bytes.fromhex('11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11'))
+        self.assertEqual(ctea.encrypt(test_data.encode()), pytea.encrypt(test_data.encode()))
 
     def test_py_long(self):
         pytea = PYTEA(bytes.fromhex('11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11'))

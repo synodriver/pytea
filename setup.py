@@ -67,9 +67,10 @@ def main():
         ext_modules=cythonize(ext_modules),
         classifiers=[
             "Development Status :: 3 - Alpha",
-            "Framework :: AsyncIO",
             "Operating System :: OS Independent",
             "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+            "Programming Language:: C",
+            "Programming Language:: Cython",
             "Programming Language :: Python",
             "Programming Language :: Python :: 3.6",
             "Programming Language :: Python :: 3.7",
