@@ -3,3 +3,8 @@
 /.idea/
 /__pycache__/
 /pytea.egg-info/
+*.dll
+*.pyd
+*.pyc
+*.exe
+*.so

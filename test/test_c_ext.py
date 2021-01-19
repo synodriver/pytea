@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 import unittest
+import sys
+
+sys.path.append("../")
 
 from pytea import TEA, PYTEA
 from pytea.pytea import tea_code, tea_decipher
@@ -79,9 +82,10 @@ SQL https://t.me/mikuri520/671''')
     def test_loginpack(self):
         ctea = TEA(bytes(16))
         with open("data.txt") as f:
-            data = f.read().strip()
-        ans = ctea.decrypt(bytes.fromhex(data))
-
+            data = bytes.fromhex(f.read().strip())
+        ans = ctea.decrypt(data)
+        self.assertEqual(len(ans),1671)
+        pass
 
 
 if __name__ == "__main__":
