@@ -10,7 +10,7 @@ from Cython.Build import cythonize
 BUILD_ARGS = defaultdict(lambda: ['-O3', '-g0'])
 
 for compiler, args in [
-    ('msvc', ['/EHsc', '/DHUNSPELL_STATIC', "/O2", r"\utf-8"]),
+    ('msvc', ['/EHsc', '/DHUNSPELL_STATIC', "/Oi", "/O2", "/Ot", r"\utf-8"]),
     ('gcc', ['-O3', '-g0'])]:
     BUILD_ARGS[compiler] = args
 
