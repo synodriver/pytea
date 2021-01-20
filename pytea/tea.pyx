@@ -122,7 +122,6 @@ cdef class TEA:
         :param text: 
         :return: 
         """
-        # cdef tea.TEA_U8 bytes_to_fill = 220 # 网里面填充220
         n = (8 - (len(text) + 2)) % 8 + 2  # 填充字符的个数 显然, n至少为2, 取2到9之间
         fill_n_or = (n - 2) | 0xF8  # 然后在填充字符前部插入1字节, 值为 ((n - 2)|0xF8) 以便标记填充字符的个数.
         text = bytes([fill_n_or]) + bytes([220]) * n + text + b'\x00' * 7  # 填充

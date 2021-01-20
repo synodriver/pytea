@@ -10,7 +10,7 @@ from Cython.Build import cythonize
 BUILD_ARGS = defaultdict(lambda: ['-O3', '-g0'])
 
 for compiler, args in [
-    ('msvc', ['/EHsc', '/DHUNSPELL_STATIC', r"\utf-8"]),
+    ('msvc', ['/EHsc', '/DHUNSPELL_STATIC', "/O2", r"\utf-8"]),
     ('gcc', ['-O3', '-g0'])]:
     BUILD_ARGS[compiler] = args
 
@@ -75,8 +75,10 @@ def main():
             "Programming Language :: Python :: 3.6",
             "Programming Language :: Python :: 3.7",
             "Programming Language :: Python :: 3.8",
+            "Programming Language :: Python :: 3.9",
             "Programming Language :: Python :: Implementation :: CPython"
         ],
+        cmdclass={'build_ext': build_ext_compiler_check},
         include_package_data=True
     )
 

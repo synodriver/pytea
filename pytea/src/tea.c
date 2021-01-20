@@ -96,14 +96,14 @@ TEA_ErrorCode_t TEA_ConfigEncryptTimes(TEA_U8 t)
 TEA_ErrorCode_t TEA_Encrypt(TEA_U8 *text, TEA_U32 size)
 {
     TEA_U32 number = size >> 3;  // size是字节数  8个字节一组进行加密 需要number组  进来的应该已经补充成了8n个字节
-    TEA_U8  i = 0;
+    TEA_U32  i = 0;
 
     if(text == NULL || size < 8)
     {
         TEA_DEBUG("at least eight bytes !\n\r");
         return TEA_ERROR;
     }
-//    printf("%s len %u\n",text,size); // todo del
+//    printf("text len %u\n",size); // todo 4096个字节传进来了
     TEA_U64 tr = 0;
     TEA_U64 to = 0;
     TEA_U64 o = 0;
@@ -128,7 +128,7 @@ TEA_ErrorCode_t TEA_Encrypt(TEA_U8 *text, TEA_U32 size)
 TEA_ErrorCode_t TEA_Decrypt(TEA_U8 *text, TEA_U32 size, TEA_U8* tag) // char* 字节数  一定是8的倍数 tag用来传递前面要跳过多少字节的填充数据 自行处理
 {
     TEA_U32 number = size >> 3;  // 8字节是一组 分为number组
-    TEA_U8  i = 0;
+    TEA_U32  i = 0;
 
     if(text == NULL || size < 8)
     {

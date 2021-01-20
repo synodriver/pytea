@@ -2906,79 +2906,79 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_encrypt(CYTHON_UNUSED struct __pyx_obj
     #endif
   }
 
-  /* "pytea/tea.pyx":126
+  /* "pytea/tea.pyx":125
+ *         :return:
  *         """
- *         # cdef tea.TEA_U8 bytes_to_fill = 220 # 220
  *         n = (8 - (len(text) + 2)) % 8 + 2  #  , n2, 29             # <<<<<<<<<<<<<<
  *         fill_n_or = (n - 2) | 0xF8  # 1,  ((n - 2)|0xF8) .
  *         text = bytes([fill_n_or]) + bytes([220]) * n + text + b'\x00' * 7  #
  */
   if (unlikely(__pyx_v_text == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
-    __PYX_ERR(0, 126, __pyx_L1_error)
+    __PYX_ERR(0, 125, __pyx_L1_error)
   }
-  __pyx_t_5 = PyBytes_GET_SIZE(__pyx_v_text); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 126, __pyx_L1_error)
-  __pyx_t_1 = PyInt_FromSsize_t((__Pyx_mod_Py_ssize_t((8 - (__pyx_t_5 + 2)), 8) + 2)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 126, __pyx_L1_error)
+  __pyx_t_5 = PyBytes_GET_SIZE(__pyx_v_text); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 125, __pyx_L1_error)
+  __pyx_t_1 = PyInt_FromSsize_t((__Pyx_mod_Py_ssize_t((8 - (__pyx_t_5 + 2)), 8) + 2)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 125, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_n = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "pytea/tea.pyx":127
- *         # cdef tea.TEA_U8 bytes_to_fill = 220 # 220
+  /* "pytea/tea.pyx":126
+ *         """
  *         n = (8 - (len(text) + 2)) % 8 + 2  #  , n2, 29
  *         fill_n_or = (n - 2) | 0xF8  # 1,  ((n - 2)|0xF8) .             # <<<<<<<<<<<<<<
  *         text = bytes([fill_n_or]) + bytes([220]) * n + text + b'\x00' * 7  #
  * 
  */
-  __pyx_t_1 = __Pyx_PyInt_SubtractObjC(__pyx_v_n, __pyx_int_2, 2, 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 127, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_SubtractObjC(__pyx_v_n, __pyx_int_2, 2, 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 126, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyInt_OrObjC(__pyx_t_1, __pyx_int_248, 0xF8, 0, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 127, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_OrObjC(__pyx_t_1, __pyx_int_248, 0xF8, 0, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 126, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_fill_n_or = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "pytea/tea.pyx":128
+  /* "pytea/tea.pyx":127
  *         n = (8 - (len(text) + 2)) % 8 + 2  #  , n2, 29
  *         fill_n_or = (n - 2) | 0xF8  # 1,  ((n - 2)|0xF8) .
  *         text = bytes([fill_n_or]) + bytes([220]) * n + text + b'\x00' * 7  #             # <<<<<<<<<<<<<<
  * 
  *         cdef int l = len(text)
  */
-  __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 128, __pyx_L1_error)
+  __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 127, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_INCREF(__pyx_v_fill_n_or);
   __Pyx_GIVEREF(__pyx_v_fill_n_or);
   PyList_SET_ITEM(__pyx_t_2, 0, __pyx_v_fill_n_or);
-  __pyx_t_1 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyBytes_Type)), __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 128, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyBytes_Type)), __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 127, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 128, __pyx_L1_error)
+  __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 127, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_INCREF(__pyx_int_220);
   __Pyx_GIVEREF(__pyx_int_220);
   PyList_SET_ITEM(__pyx_t_2, 0, __pyx_int_220);
-  __pyx_t_3 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyBytes_Type)), __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 128, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyBytes_Type)), __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 127, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyNumber_Multiply(__pyx_t_3, __pyx_v_n); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 128, __pyx_L1_error)
+  __pyx_t_2 = PyNumber_Multiply(__pyx_t_3, __pyx_v_n); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 127, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = PyNumber_Add(__pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 128, __pyx_L1_error)
+  __pyx_t_3 = PyNumber_Add(__pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 127, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyNumber_Add(__pyx_t_3, __pyx_v_text); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 128, __pyx_L1_error)
+  __pyx_t_2 = PyNumber_Add(__pyx_t_3, __pyx_v_text); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 127, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = PyNumber_Add(__pyx_t_2, __pyx_kp_b__4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 128, __pyx_L1_error)
+  __pyx_t_3 = PyNumber_Add(__pyx_t_2, __pyx_kp_b__4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 127, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (!(likely(PyBytes_CheckExact(__pyx_t_3))||((__pyx_t_3) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "bytes", Py_TYPE(__pyx_t_3)->tp_name), 0))) __PYX_ERR(0, 128, __pyx_L1_error)
+  if (!(likely(PyBytes_CheckExact(__pyx_t_3))||((__pyx_t_3) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "bytes", Py_TYPE(__pyx_t_3)->tp_name), 0))) __PYX_ERR(0, 127, __pyx_L1_error)
   __Pyx_DECREF_SET(__pyx_v_text, ((PyObject*)__pyx_t_3));
   __pyx_t_3 = 0;
 
-  /* "pytea/tea.pyx":130
+  /* "pytea/tea.pyx":129
  *         text = bytes([fill_n_or]) + bytes([220]) * n + text + b'\x00' * 7  #
  * 
  *         cdef int l = len(text)             # <<<<<<<<<<<<<<
@@ -2987,12 +2987,12 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_encrypt(CYTHON_UNUSED struct __pyx_obj
  */
   if (unlikely(__pyx_v_text == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
-    __PYX_ERR(0, 130, __pyx_L1_error)
+    __PYX_ERR(0, 129, __pyx_L1_error)
   }
-  __pyx_t_5 = PyBytes_GET_SIZE(__pyx_v_text); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 130, __pyx_L1_error)
+  __pyx_t_5 = PyBytes_GET_SIZE(__pyx_v_text); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 129, __pyx_L1_error)
   __pyx_v_l = __pyx_t_5;
 
-  /* "pytea/tea.pyx":131
+  /* "pytea/tea.pyx":130
  * 
  *         cdef int l = len(text)
  *         cdef tea.TEA_U8*temp_data = <tea.TEA_U8*> malloc(l * sizeof(tea.TEA_U8))             # <<<<<<<<<<<<<<
@@ -3001,7 +3001,7 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_encrypt(CYTHON_UNUSED struct __pyx_obj
  */
   __pyx_v_temp_data = ((TEA_U8 *)malloc((__pyx_v_l * (sizeof(TEA_U8)))));
 
-  /* "pytea/tea.pyx":132
+  /* "pytea/tea.pyx":131
  *         cdef int l = len(text)
  *         cdef tea.TEA_U8*temp_data = <tea.TEA_U8*> malloc(l * sizeof(tea.TEA_U8))
  *         if not temp_data:             # <<<<<<<<<<<<<<
@@ -3011,20 +3011,20 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_encrypt(CYTHON_UNUSED struct __pyx_obj
   __pyx_t_6 = ((!(__pyx_v_temp_data != 0)) != 0);
   if (unlikely(__pyx_t_6)) {
 
-    /* "pytea/tea.pyx":133
+    /* "pytea/tea.pyx":132
  *         cdef tea.TEA_U8*temp_data = <tea.TEA_U8*> malloc(l * sizeof(tea.TEA_U8))
  *         if not temp_data:
  *             raise MemoryError("no enough memory")             # <<<<<<<<<<<<<<
  *         memcpy(temp_data, <tea.TEA_U8*> text, l)
  *         ntohs(temp_data, l)  #
  */
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 133, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 132, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __PYX_ERR(0, 133, __pyx_L1_error)
+    __PYX_ERR(0, 132, __pyx_L1_error)
 
-    /* "pytea/tea.pyx":132
+    /* "pytea/tea.pyx":131
  *         cdef int l = len(text)
  *         cdef tea.TEA_U8*temp_data = <tea.TEA_U8*> malloc(l * sizeof(tea.TEA_U8))
  *         if not temp_data:             # <<<<<<<<<<<<<<
@@ -3033,7 +3033,7 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_encrypt(CYTHON_UNUSED struct __pyx_obj
  */
   }
 
-  /* "pytea/tea.pyx":134
+  /* "pytea/tea.pyx":133
  *         if not temp_data:
  *             raise MemoryError("no enough memory")
  *         memcpy(temp_data, <tea.TEA_U8*> text, l)             # <<<<<<<<<<<<<<
@@ -3042,12 +3042,12 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_encrypt(CYTHON_UNUSED struct __pyx_obj
  */
   if (unlikely(__pyx_v_text == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "expected bytes, NoneType found");
-    __PYX_ERR(0, 134, __pyx_L1_error)
+    __PYX_ERR(0, 133, __pyx_L1_error)
   }
-  __pyx_t_7 = __Pyx_PyBytes_AsWritableUString(__pyx_v_text); if (unlikely((!__pyx_t_7) && PyErr_Occurred())) __PYX_ERR(0, 134, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyBytes_AsWritableUString(__pyx_v_text); if (unlikely((!__pyx_t_7) && PyErr_Occurred())) __PYX_ERR(0, 133, __pyx_L1_error)
   (void)(memcpy(__pyx_v_temp_data, ((TEA_U8 *)__pyx_t_7), __pyx_v_l));
 
-  /* "pytea/tea.pyx":135
+  /* "pytea/tea.pyx":134
  *             raise MemoryError("no enough memory")
  *         memcpy(temp_data, <tea.TEA_U8*> text, l)
  *         ntohs(temp_data, l)  #             # <<<<<<<<<<<<<<
@@ -3056,7 +3056,7 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_encrypt(CYTHON_UNUSED struct __pyx_obj
  */
   __pyx_f_5pytea_3tea_ntohs(__pyx_v_temp_data, __pyx_v_l);
 
-  /* "pytea/tea.pyx":137
+  /* "pytea/tea.pyx":136
  *         ntohs(temp_data, l)  #
  * 
  *         cdef tea.TEA_ErrorCode_t flag = tea.TEA_Encrypt(<tea.TEA_U8*> temp_data, <tea.TEA_U32> len(text))             # <<<<<<<<<<<<<<
@@ -3065,12 +3065,12 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_encrypt(CYTHON_UNUSED struct __pyx_obj
  */
   if (unlikely(__pyx_v_text == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
-    __PYX_ERR(0, 137, __pyx_L1_error)
+    __PYX_ERR(0, 136, __pyx_L1_error)
   }
-  __pyx_t_5 = PyBytes_GET_SIZE(__pyx_v_text); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 137, __pyx_L1_error)
+  __pyx_t_5 = PyBytes_GET_SIZE(__pyx_v_text); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 136, __pyx_L1_error)
   __pyx_v_flag = TEA_Encrypt(((TEA_U8 *)__pyx_v_temp_data), ((TEA_U32)__pyx_t_5));
 
-  /* "pytea/tea.pyx":138
+  /* "pytea/tea.pyx":137
  * 
  *         cdef tea.TEA_ErrorCode_t flag = tea.TEA_Encrypt(<tea.TEA_U8*> temp_data, <tea.TEA_U32> len(text))
  *         if flag == tea.TEA_ERROR:             # <<<<<<<<<<<<<<
@@ -3080,20 +3080,20 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_encrypt(CYTHON_UNUSED struct __pyx_obj
   switch (__pyx_v_flag) {
     case TEA_ERROR:
 
-    /* "pytea/tea.pyx":139
+    /* "pytea/tea.pyx":138
  *         cdef tea.TEA_ErrorCode_t flag = tea.TEA_Encrypt(<tea.TEA_U8*> temp_data, <tea.TEA_U32> len(text))
  *         if flag == tea.TEA_ERROR:
  *             raise ValueError("encrypt failed")             # <<<<<<<<<<<<<<
  *         elif flag == tea.TEA_MEMORY_ERROR:
  *             raise MemoryError("out of memory")
  */
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__5, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 139, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__5, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 138, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __PYX_ERR(0, 139, __pyx_L1_error)
+    __PYX_ERR(0, 138, __pyx_L1_error)
 
-    /* "pytea/tea.pyx":138
+    /* "pytea/tea.pyx":137
  * 
  *         cdef tea.TEA_ErrorCode_t flag = tea.TEA_Encrypt(<tea.TEA_U8*> temp_data, <tea.TEA_U32> len(text))
  *         if flag == tea.TEA_ERROR:             # <<<<<<<<<<<<<<
@@ -3103,20 +3103,20 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_encrypt(CYTHON_UNUSED struct __pyx_obj
     break;
     case TEA_MEMORY_ERROR:
 
-    /* "pytea/tea.pyx":141
+    /* "pytea/tea.pyx":140
  *             raise ValueError("encrypt failed")
  *         elif flag == tea.TEA_MEMORY_ERROR:
  *             raise MemoryError("out of memory")             # <<<<<<<<<<<<<<
  *         elif flag == tea.TEA_OTHERS:
  *             raise Exception("sth wrong")
  */
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 141, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 140, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __PYX_ERR(0, 141, __pyx_L1_error)
+    __PYX_ERR(0, 140, __pyx_L1_error)
 
-    /* "pytea/tea.pyx":140
+    /* "pytea/tea.pyx":139
  *         if flag == tea.TEA_ERROR:
  *             raise ValueError("encrypt failed")
  *         elif flag == tea.TEA_MEMORY_ERROR:             # <<<<<<<<<<<<<<
@@ -3126,20 +3126,20 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_encrypt(CYTHON_UNUSED struct __pyx_obj
     break;
     case TEA_OTHERS:
 
-    /* "pytea/tea.pyx":143
+    /* "pytea/tea.pyx":142
  *             raise MemoryError("out of memory")
  *         elif flag == tea.TEA_OTHERS:
  *             raise Exception("sth wrong")             # <<<<<<<<<<<<<<
  *         ntohs(temp_data, len(text))
  *         return <bytes> temp_data[0:len(text)]
  */
-    __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])), __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 143, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])), __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 142, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __PYX_ERR(0, 143, __pyx_L1_error)
+    __PYX_ERR(0, 142, __pyx_L1_error)
 
-    /* "pytea/tea.pyx":142
+    /* "pytea/tea.pyx":141
  *         elif flag == tea.TEA_MEMORY_ERROR:
  *             raise MemoryError("out of memory")
  *         elif flag == tea.TEA_OTHERS:             # <<<<<<<<<<<<<<
@@ -3150,7 +3150,7 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_encrypt(CYTHON_UNUSED struct __pyx_obj
     default: break;
   }
 
-  /* "pytea/tea.pyx":144
+  /* "pytea/tea.pyx":143
  *         elif flag == tea.TEA_OTHERS:
  *             raise Exception("sth wrong")
  *         ntohs(temp_data, len(text))             # <<<<<<<<<<<<<<
@@ -3159,12 +3159,12 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_encrypt(CYTHON_UNUSED struct __pyx_obj
  */
   if (unlikely(__pyx_v_text == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
-    __PYX_ERR(0, 144, __pyx_L1_error)
+    __PYX_ERR(0, 143, __pyx_L1_error)
   }
-  __pyx_t_5 = PyBytes_GET_SIZE(__pyx_v_text); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 144, __pyx_L1_error)
+  __pyx_t_5 = PyBytes_GET_SIZE(__pyx_v_text); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 143, __pyx_L1_error)
   __pyx_f_5pytea_3tea_ntohs(__pyx_v_temp_data, __pyx_t_5);
 
-  /* "pytea/tea.pyx":145
+  /* "pytea/tea.pyx":144
  *             raise Exception("sth wrong")
  *         ntohs(temp_data, len(text))
  *         return <bytes> temp_data[0:len(text)]             # <<<<<<<<<<<<<<
@@ -3174,10 +3174,10 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_encrypt(CYTHON_UNUSED struct __pyx_obj
   __Pyx_XDECREF(__pyx_r);
   if (unlikely(__pyx_v_text == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
-    __PYX_ERR(0, 145, __pyx_L1_error)
+    __PYX_ERR(0, 144, __pyx_L1_error)
   }
-  __pyx_t_5 = PyBytes_GET_SIZE(__pyx_v_text); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 145, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_PyBytes_FromStringAndSize(((const char*)__pyx_v_temp_data) + 0, __pyx_t_5 - 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 145, __pyx_L1_error)
+  __pyx_t_5 = PyBytes_GET_SIZE(__pyx_v_text); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 144, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyBytes_FromStringAndSize(((const char*)__pyx_v_temp_data) + 0, __pyx_t_5 - 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 144, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_INCREF(((PyObject*)__pyx_t_3));
   __pyx_r = __pyx_t_3;
@@ -3257,7 +3257,7 @@ static PyObject *__pyx_pf_5pytea_3tea_3TEA_6encrypt(struct __pyx_obj_5pytea_3tea
   return __pyx_r;
 }
 
-/* "pytea/tea.pyx":147
+/* "pytea/tea.pyx":146
  *         return <bytes> temp_data[0:len(text)]
  * 
  *     cpdef decrypt(self, bytes text):             # <<<<<<<<<<<<<<
@@ -3295,7 +3295,7 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_decrypt(CYTHON_UNUSED struct __pyx_obj
     if (unlikely(!__Pyx_object_dict_version_matches(((PyObject *)__pyx_v_self), __pyx_tp_dict_version, __pyx_obj_dict_version))) {
       PY_UINT64_T __pyx_type_dict_guard = __Pyx_get_tp_dict_version(((PyObject *)__pyx_v_self));
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_decrypt); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 147, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_decrypt); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 146, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       if (!PyCFunction_Check(__pyx_t_1) || (PyCFunction_GET_FUNCTION(__pyx_t_1) != (PyCFunction)(void*)__pyx_pw_5pytea_3tea_3TEA_9decrypt)) {
         __Pyx_XDECREF(__pyx_r);
@@ -3312,7 +3312,7 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_decrypt(CYTHON_UNUSED struct __pyx_obj
         }
         __pyx_t_2 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_4, __pyx_v_text) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_text);
         __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-        if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 147, __pyx_L1_error)
+        if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 146, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         __pyx_r = __pyx_t_2;
@@ -3333,7 +3333,7 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_decrypt(CYTHON_UNUSED struct __pyx_obj
     #endif
   }
 
-  /* "pytea/tea.pyx":153
+  /* "pytea/tea.pyx":152
  *         :return:
  *         """
  *         cdef int l = len(text)             # <<<<<<<<<<<<<<
@@ -3342,12 +3342,12 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_decrypt(CYTHON_UNUSED struct __pyx_obj
  */
   if (unlikely(__pyx_v_text == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
-    __PYX_ERR(0, 153, __pyx_L1_error)
+    __PYX_ERR(0, 152, __pyx_L1_error)
   }
-  __pyx_t_5 = PyBytes_GET_SIZE(__pyx_v_text); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 153, __pyx_L1_error)
+  __pyx_t_5 = PyBytes_GET_SIZE(__pyx_v_text); if (unlikely(__pyx_t_5 == ((Py_ssize_t)-1))) __PYX_ERR(0, 152, __pyx_L1_error)
   __pyx_v_l = __pyx_t_5;
 
-  /* "pytea/tea.pyx":154
+  /* "pytea/tea.pyx":153
  *         """
  *         cdef int l = len(text)
  *         if l % 8 != 0 or l < 16:             # <<<<<<<<<<<<<<
@@ -3365,20 +3365,20 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_decrypt(CYTHON_UNUSED struct __pyx_obj
   __pyx_L4_bool_binop_done:;
   if (unlikely(__pyx_t_6)) {
 
-    /* "pytea/tea.pyx":155
+    /* "pytea/tea.pyx":154
  *         cdef int l = len(text)
  *         if l % 8 != 0 or l < 16:
  *             raise ValueError("decrypt failed, len%8!=0")             # <<<<<<<<<<<<<<
  * 
  *         cdef tea.TEA_U8 tag = 0
  */
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 155, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 154, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(0, 155, __pyx_L1_error)
+    __PYX_ERR(0, 154, __pyx_L1_error)
 
-    /* "pytea/tea.pyx":154
+    /* "pytea/tea.pyx":153
  *         """
  *         cdef int l = len(text)
  *         if l % 8 != 0 or l < 16:             # <<<<<<<<<<<<<<
@@ -3387,7 +3387,7 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_decrypt(CYTHON_UNUSED struct __pyx_obj
  */
   }
 
-  /* "pytea/tea.pyx":157
+  /* "pytea/tea.pyx":156
  *             raise ValueError("decrypt failed, len%8!=0")
  * 
  *         cdef tea.TEA_U8 tag = 0             # <<<<<<<<<<<<<<
@@ -3396,7 +3396,7 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_decrypt(CYTHON_UNUSED struct __pyx_obj
  */
   __pyx_v_tag = 0;
 
-  /* "pytea/tea.pyx":159
+  /* "pytea/tea.pyx":158
  *         cdef tea.TEA_U8 tag = 0
  * 
  *         cdef tea.TEA_U8*temp_data = <tea.TEA_U8*> malloc(l * sizeof(tea.TEA_U8))             # <<<<<<<<<<<<<<
@@ -3405,7 +3405,7 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_decrypt(CYTHON_UNUSED struct __pyx_obj
  */
   __pyx_v_temp_data = ((TEA_U8 *)malloc((__pyx_v_l * (sizeof(TEA_U8)))));
 
-  /* "pytea/tea.pyx":160
+  /* "pytea/tea.pyx":159
  * 
  *         cdef tea.TEA_U8*temp_data = <tea.TEA_U8*> malloc(l * sizeof(tea.TEA_U8))
  *         if not temp_data:             # <<<<<<<<<<<<<<
@@ -3415,20 +3415,20 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_decrypt(CYTHON_UNUSED struct __pyx_obj
   __pyx_t_6 = ((!(__pyx_v_temp_data != 0)) != 0);
   if (unlikely(__pyx_t_6)) {
 
-    /* "pytea/tea.pyx":161
+    /* "pytea/tea.pyx":160
  *         cdef tea.TEA_U8*temp_data = <tea.TEA_U8*> malloc(l * sizeof(tea.TEA_U8))
  *         if not temp_data:
  *             raise MemoryError("no enough memory")             # <<<<<<<<<<<<<<
  *         memcpy(temp_data, <tea.TEA_U8*> text, l)
  *         ntohs(temp_data, l)
  */
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 161, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 160, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(0, 161, __pyx_L1_error)
+    __PYX_ERR(0, 160, __pyx_L1_error)
 
-    /* "pytea/tea.pyx":160
+    /* "pytea/tea.pyx":159
  * 
  *         cdef tea.TEA_U8*temp_data = <tea.TEA_U8*> malloc(l * sizeof(tea.TEA_U8))
  *         if not temp_data:             # <<<<<<<<<<<<<<
@@ -3437,7 +3437,7 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_decrypt(CYTHON_UNUSED struct __pyx_obj
  */
   }
 
-  /* "pytea/tea.pyx":162
+  /* "pytea/tea.pyx":161
  *         if not temp_data:
  *             raise MemoryError("no enough memory")
  *         memcpy(temp_data, <tea.TEA_U8*> text, l)             # <<<<<<<<<<<<<<
@@ -3446,12 +3446,12 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_decrypt(CYTHON_UNUSED struct __pyx_obj
  */
   if (unlikely(__pyx_v_text == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "expected bytes, NoneType found");
-    __PYX_ERR(0, 162, __pyx_L1_error)
+    __PYX_ERR(0, 161, __pyx_L1_error)
   }
-  __pyx_t_8 = __Pyx_PyBytes_AsWritableUString(__pyx_v_text); if (unlikely((!__pyx_t_8) && PyErr_Occurred())) __PYX_ERR(0, 162, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyBytes_AsWritableUString(__pyx_v_text); if (unlikely((!__pyx_t_8) && PyErr_Occurred())) __PYX_ERR(0, 161, __pyx_L1_error)
   (void)(memcpy(__pyx_v_temp_data, ((TEA_U8 *)__pyx_t_8), __pyx_v_l));
 
-  /* "pytea/tea.pyx":163
+  /* "pytea/tea.pyx":162
  *             raise MemoryError("no enough memory")
  *         memcpy(temp_data, <tea.TEA_U8*> text, l)
  *         ntohs(temp_data, l)             # <<<<<<<<<<<<<<
@@ -3460,7 +3460,7 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_decrypt(CYTHON_UNUSED struct __pyx_obj
  */
   __pyx_f_5pytea_3tea_ntohs(__pyx_v_temp_data, __pyx_v_l);
 
-  /* "pytea/tea.pyx":165
+  /* "pytea/tea.pyx":164
  *         ntohs(temp_data, l)
  * 
  *         cdef tea.TEA_ErrorCode_t flag = tea.TEA_Decrypt(<tea.TEA_U8*> temp_data, <tea.TEA_U32> l, &tag)             # <<<<<<<<<<<<<<
@@ -3469,7 +3469,7 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_decrypt(CYTHON_UNUSED struct __pyx_obj
  */
   __pyx_v_flag = TEA_Decrypt(((TEA_U8 *)__pyx_v_temp_data), ((TEA_U32)__pyx_v_l), (&__pyx_v_tag));
 
-  /* "pytea/tea.pyx":166
+  /* "pytea/tea.pyx":165
  * 
  *         cdef tea.TEA_ErrorCode_t flag = tea.TEA_Decrypt(<tea.TEA_U8*> temp_data, <tea.TEA_U32> l, &tag)
  *         if flag == tea.TEA_ERROR:             # <<<<<<<<<<<<<<
@@ -3479,20 +3479,20 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_decrypt(CYTHON_UNUSED struct __pyx_obj
   switch (__pyx_v_flag) {
     case TEA_ERROR:
 
-    /* "pytea/tea.pyx":167
+    /* "pytea/tea.pyx":166
  *         cdef tea.TEA_ErrorCode_t flag = tea.TEA_Decrypt(<tea.TEA_U8*> temp_data, <tea.TEA_U32> l, &tag)
  *         if flag == tea.TEA_ERROR:
  *             raise ValueError("decrypt failed")             # <<<<<<<<<<<<<<
  *         elif flag == tea.TEA_MEMORY_ERROR:
  *             raise MemoryError("out of memory")
  */
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__8, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 167, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__8, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 166, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(0, 167, __pyx_L1_error)
+    __PYX_ERR(0, 166, __pyx_L1_error)
 
-    /* "pytea/tea.pyx":166
+    /* "pytea/tea.pyx":165
  * 
  *         cdef tea.TEA_ErrorCode_t flag = tea.TEA_Decrypt(<tea.TEA_U8*> temp_data, <tea.TEA_U32> l, &tag)
  *         if flag == tea.TEA_ERROR:             # <<<<<<<<<<<<<<
@@ -3502,20 +3502,20 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_decrypt(CYTHON_UNUSED struct __pyx_obj
     break;
     case TEA_MEMORY_ERROR:
 
-    /* "pytea/tea.pyx":169
+    /* "pytea/tea.pyx":168
  *             raise ValueError("decrypt failed")
  *         elif flag == tea.TEA_MEMORY_ERROR:
  *             raise MemoryError("out of memory")             # <<<<<<<<<<<<<<
  *         elif flag == tea.TEA_OTHERS:
  *             raise Exception("sth wrong")
  */
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 169, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 168, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(0, 169, __pyx_L1_error)
+    __PYX_ERR(0, 168, __pyx_L1_error)
 
-    /* "pytea/tea.pyx":168
+    /* "pytea/tea.pyx":167
  *         if flag == tea.TEA_ERROR:
  *             raise ValueError("decrypt failed")
  *         elif flag == tea.TEA_MEMORY_ERROR:             # <<<<<<<<<<<<<<
@@ -3525,20 +3525,20 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_decrypt(CYTHON_UNUSED struct __pyx_obj
     break;
     case TEA_OTHERS:
 
-    /* "pytea/tea.pyx":171
+    /* "pytea/tea.pyx":170
  *             raise MemoryError("out of memory")
  *         elif flag == tea.TEA_OTHERS:
  *             raise Exception("sth wrong")             # <<<<<<<<<<<<<<
  * 
  *         ntohs(temp_data, l)
  */
-    __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])), __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 171, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)(&((PyTypeObject*)PyExc_Exception)[0])), __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 170, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(0, 171, __pyx_L1_error)
+    __PYX_ERR(0, 170, __pyx_L1_error)
 
-    /* "pytea/tea.pyx":170
+    /* "pytea/tea.pyx":169
  *         elif flag == tea.TEA_MEMORY_ERROR:
  *             raise MemoryError("out of memory")
  *         elif flag == tea.TEA_OTHERS:             # <<<<<<<<<<<<<<
@@ -3549,7 +3549,7 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_decrypt(CYTHON_UNUSED struct __pyx_obj
     default: break;
   }
 
-  /* "pytea/tea.pyx":173
+  /* "pytea/tea.pyx":172
  *             raise Exception("sth wrong")
  * 
  *         ntohs(temp_data, l)             # <<<<<<<<<<<<<<
@@ -3558,14 +3558,14 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_decrypt(CYTHON_UNUSED struct __pyx_obj
  */
   __pyx_f_5pytea_3tea_ntohs(__pyx_v_temp_data, __pyx_v_l);
 
-  /* "pytea/tea.pyx":175
+  /* "pytea/tea.pyx":174
  *         ntohs(temp_data, l)
  *         # print(f"len {l}")
  *         data = <bytes> temp_data[0:l]             # <<<<<<<<<<<<<<
  *         # print(data)
  *         if data[-7:] != b"\x00" * 7:
  */
-  __pyx_t_1 = __Pyx_PyBytes_FromStringAndSize(((const char*)__pyx_v_temp_data) + 0, __pyx_v_l - 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 175, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBytes_FromStringAndSize(((const char*)__pyx_v_temp_data) + 0, __pyx_v_l - 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 174, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_2 = __pyx_t_1;
   __Pyx_INCREF(__pyx_t_2);
@@ -3573,7 +3573,7 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_decrypt(CYTHON_UNUSED struct __pyx_obj
   __pyx_v_data = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "pytea/tea.pyx":177
+  /* "pytea/tea.pyx":176
  *         data = <bytes> temp_data[0:l]
  *         # print(data)
  *         if data[-7:] != b"\x00" * 7:             # <<<<<<<<<<<<<<
@@ -3582,28 +3582,28 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_decrypt(CYTHON_UNUSED struct __pyx_obj
  */
   if (unlikely(__pyx_v_data == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(0, 177, __pyx_L1_error)
+    __PYX_ERR(0, 176, __pyx_L1_error)
   }
-  __pyx_t_2 = PySequence_GetSlice(__pyx_v_data, -7L, PY_SSIZE_T_MAX); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 177, __pyx_L1_error)
+  __pyx_t_2 = PySequence_GetSlice(__pyx_v_data, -7L, PY_SSIZE_T_MAX); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 176, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_6 = (__Pyx_PyBytes_Equals(__pyx_t_2, __pyx_kp_b__4, Py_NE)); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(0, 177, __pyx_L1_error)
+  __pyx_t_6 = (__Pyx_PyBytes_Equals(__pyx_t_2, __pyx_kp_b__4, Py_NE)); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(0, 176, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_7 = (__pyx_t_6 != 0);
   if (unlikely(__pyx_t_7)) {
 
-    /* "pytea/tea.pyx":178
+    /* "pytea/tea.pyx":177
  *         # print(data)
  *         if data[-7:] != b"\x00" * 7:
  *             raise ValueError("decrypt failed: illegal bytes ends without 0000000")             # <<<<<<<<<<<<<<
  *         return data[tag:-7]
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__9, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 178, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__9, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 177, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 178, __pyx_L1_error)
+    __PYX_ERR(0, 177, __pyx_L1_error)
 
-    /* "pytea/tea.pyx":177
+    /* "pytea/tea.pyx":176
  *         data = <bytes> temp_data[0:l]
  *         # print(data)
  *         if data[-7:] != b"\x00" * 7:             # <<<<<<<<<<<<<<
@@ -3612,7 +3612,7 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_decrypt(CYTHON_UNUSED struct __pyx_obj
  */
   }
 
-  /* "pytea/tea.pyx":179
+  /* "pytea/tea.pyx":178
  *         if data[-7:] != b"\x00" * 7:
  *             raise ValueError("decrypt failed: illegal bytes ends without 0000000")
  *         return data[tag:-7]             # <<<<<<<<<<<<<<
@@ -3620,15 +3620,15 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_decrypt(CYTHON_UNUSED struct __pyx_obj
   __Pyx_XDECREF(__pyx_r);
   if (unlikely(__pyx_v_data == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(0, 179, __pyx_L1_error)
+    __PYX_ERR(0, 178, __pyx_L1_error)
   }
-  __pyx_t_2 = PySequence_GetSlice(__pyx_v_data, __pyx_v_tag, -7L); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 179, __pyx_L1_error)
+  __pyx_t_2 = PySequence_GetSlice(__pyx_v_data, __pyx_v_tag, -7L); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 178, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "pytea/tea.pyx":147
+  /* "pytea/tea.pyx":146
  *         return <bytes> temp_data[0:len(text)]
  * 
  *     cpdef decrypt(self, bytes text):             # <<<<<<<<<<<<<<
@@ -3661,7 +3661,7 @@ static PyObject *__pyx_pw_5pytea_3tea_3TEA_9decrypt(PyObject *__pyx_v_self, PyOb
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("decrypt (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_text), (&PyBytes_Type), 1, "text", 1))) __PYX_ERR(0, 147, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_text), (&PyBytes_Type), 1, "text", 1))) __PYX_ERR(0, 146, __pyx_L1_error)
   __pyx_r = __pyx_pf_5pytea_3tea_3TEA_8decrypt(((struct __pyx_obj_5pytea_3tea_TEA *)__pyx_v_self), ((PyObject*)__pyx_v_text));
 
   /* function exit code */
@@ -3682,7 +3682,7 @@ static PyObject *__pyx_pf_5pytea_3tea_3TEA_8decrypt(struct __pyx_obj_5pytea_3tea
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("decrypt", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_5pytea_3tea_3TEA_decrypt(__pyx_v_self, __pyx_v_text, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 147, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_5pytea_3tea_3TEA_decrypt(__pyx_v_self, __pyx_v_text, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 146, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -4970,7 +4970,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
   __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 15, __pyx_L1_error)
   __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_n_s_MemoryError); if (!__pyx_builtin_MemoryError) __PYX_ERR(0, 35, __pyx_L1_error)
-  __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(0, 139, __pyx_L1_error)
+  __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(0, 138, __pyx_L1_error)
   __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) __PYX_ERR(1, 81, __pyx_L1_error)
   __pyx_builtin_OverflowError = __Pyx_GetBuiltinName(__pyx_n_s_OverflowError); if (!__pyx_builtin_OverflowError) __PYX_ERR(1, 81, __pyx_L1_error)
   __pyx_builtin_enumerate = __Pyx_GetBuiltinName(__pyx_n_s_enumerate); if (!__pyx_builtin_enumerate) __PYX_ERR(1, 84, __pyx_L1_error)
@@ -5017,57 +5017,57 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__3);
   __Pyx_GIVEREF(__pyx_tuple__3);
 
-  /* "pytea/tea.pyx":139
+  /* "pytea/tea.pyx":138
  *         cdef tea.TEA_ErrorCode_t flag = tea.TEA_Encrypt(<tea.TEA_U8*> temp_data, <tea.TEA_U32> len(text))
  *         if flag == tea.TEA_ERROR:
  *             raise ValueError("encrypt failed")             # <<<<<<<<<<<<<<
  *         elif flag == tea.TEA_MEMORY_ERROR:
  *             raise MemoryError("out of memory")
  */
-  __pyx_tuple__5 = PyTuple_Pack(1, __pyx_kp_u_encrypt_failed); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(0, 139, __pyx_L1_error)
+  __pyx_tuple__5 = PyTuple_Pack(1, __pyx_kp_u_encrypt_failed); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(0, 138, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__5);
   __Pyx_GIVEREF(__pyx_tuple__5);
 
-  /* "pytea/tea.pyx":141
+  /* "pytea/tea.pyx":140
  *             raise ValueError("encrypt failed")
  *         elif flag == tea.TEA_MEMORY_ERROR:
  *             raise MemoryError("out of memory")             # <<<<<<<<<<<<<<
  *         elif flag == tea.TEA_OTHERS:
  *             raise Exception("sth wrong")
  */
-  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_kp_u_out_of_memory); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 141, __pyx_L1_error)
+  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_kp_u_out_of_memory); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 140, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__6);
   __Pyx_GIVEREF(__pyx_tuple__6);
 
-  /* "pytea/tea.pyx":155
+  /* "pytea/tea.pyx":154
  *         cdef int l = len(text)
  *         if l % 8 != 0 or l < 16:
  *             raise ValueError("decrypt failed, len%8!=0")             # <<<<<<<<<<<<<<
  * 
  *         cdef tea.TEA_U8 tag = 0
  */
-  __pyx_tuple__7 = PyTuple_Pack(1, __pyx_kp_u_decrypt_failed_len_8_0); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 155, __pyx_L1_error)
+  __pyx_tuple__7 = PyTuple_Pack(1, __pyx_kp_u_decrypt_failed_len_8_0); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 154, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__7);
   __Pyx_GIVEREF(__pyx_tuple__7);
 
-  /* "pytea/tea.pyx":167
+  /* "pytea/tea.pyx":166
  *         cdef tea.TEA_ErrorCode_t flag = tea.TEA_Decrypt(<tea.TEA_U8*> temp_data, <tea.TEA_U32> l, &tag)
  *         if flag == tea.TEA_ERROR:
  *             raise ValueError("decrypt failed")             # <<<<<<<<<<<<<<
  *         elif flag == tea.TEA_MEMORY_ERROR:
  *             raise MemoryError("out of memory")
  */
-  __pyx_tuple__8 = PyTuple_Pack(1, __pyx_kp_u_decrypt_failed); if (unlikely(!__pyx_tuple__8)) __PYX_ERR(0, 167, __pyx_L1_error)
+  __pyx_tuple__8 = PyTuple_Pack(1, __pyx_kp_u_decrypt_failed); if (unlikely(!__pyx_tuple__8)) __PYX_ERR(0, 166, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__8);
   __Pyx_GIVEREF(__pyx_tuple__8);
 
-  /* "pytea/tea.pyx":178
+  /* "pytea/tea.pyx":177
  *         # print(data)
  *         if data[-7:] != b"\x00" * 7:
  *             raise ValueError("decrypt failed: illegal bytes ends without 0000000")             # <<<<<<<<<<<<<<
  *         return data[tag:-7]
  */
-  __pyx_tuple__9 = PyTuple_Pack(1, __pyx_kp_u_decrypt_failed_illegal_bytes_end); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 178, __pyx_L1_error)
+  __pyx_tuple__9 = PyTuple_Pack(1, __pyx_kp_u_decrypt_failed_illegal_bytes_end); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 177, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__9);
   __Pyx_GIVEREF(__pyx_tuple__9);
 

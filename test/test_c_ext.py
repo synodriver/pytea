@@ -84,8 +84,14 @@ SQL https://t.me/mikuri520/671''')
         with open("data.txt") as f:
             data = bytes.fromhex(f.read().strip())
         ans = ctea.decrypt(data)
-        self.assertEqual(len(ans),1671)
+        self.assertEqual(len(ans), 1671)
         pass
+
+    def test_veryloing(self):
+        data_py = self.pytea.encrypt(bytes(4096))
+        data_c = self.ctea.encrypt(bytes(4096))
+        self.assertEqual(data_c, data_py)
+        self.assertEqual(self.pytea.encrypt(data_c), self.pytea.encrypt(data_py))
 
 
 if __name__ == "__main__":
