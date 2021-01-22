@@ -126,7 +126,7 @@ cdef class TEA:
         fill_n_or = (n - 2) | 0xF8  # 然后在填充字符前部插入1字节, 值为 ((n - 2)|0xF8) 以便标记填充字符的个数.
         text = bytes([fill_n_or]) + bytes([220]) * n + text + b'\x00' * 7  # 填充
 
-        cdef int l = len(text)
+        cdef Py_ssize_t l = len(text)
         cdef tea.TEA_U8*temp_data = <tea.TEA_U8*> malloc(l * sizeof(tea.TEA_U8))
         if not temp_data:
             raise MemoryError("no enough memory")
@@ -149,7 +149,7 @@ cdef class TEA:
         :param text: 
         :return: 
         """
-        cdef int l = len(text)
+        cdef Py_ssize_t l = len(text)
         if l % 8 != 0 or l < 16:
             raise ValueError("decrypt failed, len%8!=0")
 

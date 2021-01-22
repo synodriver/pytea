@@ -93,6 +93,11 @@ SQL https://t.me/mikuri520/671''')
         self.assertEqual(data_c, data_py)
         self.assertEqual(self.pytea.encrypt(data_c), self.pytea.encrypt(data_py))
 
+    def test_two_instance(self):
+        ctea = TEA(bytes(16))
+        self.assertEqual(ctea.secret_key, bytes(16))
+        self.assertEqual(self.ctea.secret_key, self.secret_key)
+
 
 if __name__ == "__main__":
     unittest.main()

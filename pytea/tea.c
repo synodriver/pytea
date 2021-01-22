@@ -1097,9 +1097,6 @@ static PyObject* __Pyx_PyInt_SubtractObjC(PyObject *op1, PyObject *op2, long int
     (inplace ? PyNumber_InPlaceSubtract(op1, op2) : PyNumber_Subtract(op1, op2))
 #endif
 
-/* None.proto */
-static CYTHON_INLINE long __Pyx_mod_long(long, long);
-
 /* IncludeStringH.proto */
 #include <string.h>
 
@@ -2842,7 +2839,7 @@ static PyObject *__pyx_pw_5pytea_3tea_3TEA_7encrypt(PyObject *__pyx_v_self, PyOb
 static PyObject *__pyx_f_5pytea_3tea_3TEA_encrypt(CYTHON_UNUSED struct __pyx_obj_5pytea_3tea_TEA *__pyx_v_self, PyObject *__pyx_v_text, int __pyx_skip_dispatch) {
   PyObject *__pyx_v_n = NULL;
   PyObject *__pyx_v_fill_n_or = NULL;
-  int __pyx_v_l;
+  Py_ssize_t __pyx_v_l;
   TEA_U8 *__pyx_v_temp_data;
   TEA_ErrorCode_t __pyx_v_flag;
   PyObject *__pyx_r = NULL;
@@ -2943,7 +2940,7 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_encrypt(CYTHON_UNUSED struct __pyx_obj
  *         fill_n_or = (n - 2) | 0xF8  # 1,  ((n - 2)|0xF8) .
  *         text = bytes([fill_n_or]) + bytes([220]) * n + text + b'\x00' * 7  #             # <<<<<<<<<<<<<<
  * 
- *         cdef int l = len(text)
+ *         cdef Py_ssize_t l = len(text)
  */
   __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 127, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
@@ -2981,7 +2978,7 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_encrypt(CYTHON_UNUSED struct __pyx_obj
   /* "pytea/tea.pyx":129
  *         text = bytes([fill_n_or]) + bytes([220]) * n + text + b'\x00' * 7  #
  * 
- *         cdef int l = len(text)             # <<<<<<<<<<<<<<
+ *         cdef Py_ssize_t l = len(text)             # <<<<<<<<<<<<<<
  *         cdef tea.TEA_U8*temp_data = <tea.TEA_U8*> malloc(l * sizeof(tea.TEA_U8))
  *         if not temp_data:
  */
@@ -2994,7 +2991,7 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_encrypt(CYTHON_UNUSED struct __pyx_obj
 
   /* "pytea/tea.pyx":130
  * 
- *         cdef int l = len(text)
+ *         cdef Py_ssize_t l = len(text)
  *         cdef tea.TEA_U8*temp_data = <tea.TEA_U8*> malloc(l * sizeof(tea.TEA_U8))             # <<<<<<<<<<<<<<
  *         if not temp_data:
  *             raise MemoryError("no enough memory")
@@ -3002,7 +2999,7 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_encrypt(CYTHON_UNUSED struct __pyx_obj
   __pyx_v_temp_data = ((TEA_U8 *)malloc((__pyx_v_l * (sizeof(TEA_U8)))));
 
   /* "pytea/tea.pyx":131
- *         cdef int l = len(text)
+ *         cdef Py_ssize_t l = len(text)
  *         cdef tea.TEA_U8*temp_data = <tea.TEA_U8*> malloc(l * sizeof(tea.TEA_U8))
  *         if not temp_data:             # <<<<<<<<<<<<<<
  *             raise MemoryError("no enough memory")
@@ -3025,7 +3022,7 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_encrypt(CYTHON_UNUSED struct __pyx_obj
     __PYX_ERR(0, 132, __pyx_L1_error)
 
     /* "pytea/tea.pyx":131
- *         cdef int l = len(text)
+ *         cdef Py_ssize_t l = len(text)
  *         cdef tea.TEA_U8*temp_data = <tea.TEA_U8*> malloc(l * sizeof(tea.TEA_U8))
  *         if not temp_data:             # <<<<<<<<<<<<<<
  *             raise MemoryError("no enough memory")
@@ -3267,7 +3264,7 @@ static PyObject *__pyx_pf_5pytea_3tea_3TEA_6encrypt(struct __pyx_obj_5pytea_3tea
 
 static PyObject *__pyx_pw_5pytea_3tea_3TEA_9decrypt(PyObject *__pyx_v_self, PyObject *__pyx_v_text); /*proto*/
 static PyObject *__pyx_f_5pytea_3tea_3TEA_decrypt(CYTHON_UNUSED struct __pyx_obj_5pytea_3tea_TEA *__pyx_v_self, PyObject *__pyx_v_text, int __pyx_skip_dispatch) {
-  int __pyx_v_l;
+  Py_ssize_t __pyx_v_l;
   TEA_U8 __pyx_v_tag;
   TEA_U8 *__pyx_v_temp_data;
   TEA_ErrorCode_t __pyx_v_flag;
@@ -3336,7 +3333,7 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_decrypt(CYTHON_UNUSED struct __pyx_obj
   /* "pytea/tea.pyx":152
  *         :return:
  *         """
- *         cdef int l = len(text)             # <<<<<<<<<<<<<<
+ *         cdef Py_ssize_t l = len(text)             # <<<<<<<<<<<<<<
  *         if l % 8 != 0 or l < 16:
  *             raise ValueError("decrypt failed, len%8!=0")
  */
@@ -3349,12 +3346,12 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_decrypt(CYTHON_UNUSED struct __pyx_obj
 
   /* "pytea/tea.pyx":153
  *         """
- *         cdef int l = len(text)
+ *         cdef Py_ssize_t l = len(text)
  *         if l % 8 != 0 or l < 16:             # <<<<<<<<<<<<<<
  *             raise ValueError("decrypt failed, len%8!=0")
  * 
  */
-  __pyx_t_7 = ((__Pyx_mod_long(__pyx_v_l, 8) != 0) != 0);
+  __pyx_t_7 = ((__Pyx_mod_Py_ssize_t(__pyx_v_l, 8) != 0) != 0);
   if (!__pyx_t_7) {
   } else {
     __pyx_t_6 = __pyx_t_7;
@@ -3366,7 +3363,7 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_decrypt(CYTHON_UNUSED struct __pyx_obj
   if (unlikely(__pyx_t_6)) {
 
     /* "pytea/tea.pyx":154
- *         cdef int l = len(text)
+ *         cdef Py_ssize_t l = len(text)
  *         if l % 8 != 0 or l < 16:
  *             raise ValueError("decrypt failed, len%8!=0")             # <<<<<<<<<<<<<<
  * 
@@ -3380,7 +3377,7 @@ static PyObject *__pyx_f_5pytea_3tea_3TEA_decrypt(CYTHON_UNUSED struct __pyx_obj
 
     /* "pytea/tea.pyx":153
  *         """
- *         cdef int l = len(text)
+ *         cdef Py_ssize_t l = len(text)
  *         if l % 8 != 0 or l < 16:             # <<<<<<<<<<<<<<
  *             raise ValueError("decrypt failed, len%8!=0")
  * 
@@ -5040,7 +5037,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__6);
 
   /* "pytea/tea.pyx":154
- *         cdef int l = len(text)
+ *         cdef Py_ssize_t l = len(text)
  *         if l % 8 != 0 or l < 16:
  *             raise ValueError("decrypt failed, len%8!=0")             # <<<<<<<<<<<<<<
  * 
@@ -6356,13 +6353,6 @@ static PyObject* __Pyx_PyInt_SubtractObjC(PyObject *op1, PyObject *op2, CYTHON_U
     return (inplace ? PyNumber_InPlaceSubtract : PyNumber_Subtract)(op1, op2);
 }
 #endif
-
-/* None */
-static CYTHON_INLINE long __Pyx_mod_long(long a, long b) {
-    long r = a % b;
-    r += ((r != 0) & ((r ^ b) < 0)) * b;
-    return r;
-}
 
 /* BytesEquals */
 static CYTHON_INLINE int __Pyx_PyBytes_Equals(PyObject* s1, PyObject* s2, int equals) {
