@@ -1,6 +1,7 @@
 # cython: language_level=3
-from libc.stdlib cimport malloc, free
+from cpython.mem cimport PyMem_Malloc, PyMem_Free
 from libc.string cimport memcpy
+
 from pytea cimport tea
 
 cdef tea.TEA_U8*conv(tea.TEA_U8*data, int size):
@@ -30,7 +31,7 @@ cdef class TEA:
 
     def __init__(self, bytes secret_key, int encrypt_times=16):  # bytes会被改变
         # k = struct.unpack('>LLLL', secret_key[0:16])
-        cdef tea.TEA_U8*temp_data = <tea.TEA_U8*> malloc(16 * sizeof(tea.TEA_U8))
+        cdef tea.TEA_U8*temp_data = <tea.TEA_U8*> PyMem_Malloc(16 * sizeof(tea.TEA_U8))
         if not temp_data:
             raise MemoryError("no enough memory")
         memcpy(temp_data, <tea.TEA_U8*> secret_key, 16)
@@ -39,7 +40,7 @@ cdef class TEA:
         cdef tea.TEA_U8 i
         for i in range(4):
             (<tea.TEA_U32*> self._secret_key)[i] = (<tea.TEA_U32*> temp_data)[i]
-        free(temp_data)
+        PyMem_Free(temp_data)
         self._encrypt_times = encrypt_times
         cdef tea.TEA_ErrorCode_t flag = tea.TEA_Config128bitsKey(<tea.TEA_U8*> self._secret_key)
         if flag != tea.TEA_SUCCESS:
@@ -66,7 +67,7 @@ cdef class TEA:
 
     @secret_key.setter
     def secret_key(self, bytes value):
-        cdef tea.TEA_U8* temp_data = <tea.TEA_U8*> malloc(16 * sizeof(tea.TEA_U8))
+        cdef tea.TEA_U8*temp_data = <tea.TEA_U8*> PyMem_Malloc(16 * sizeof(tea.TEA_U8))
         if not temp_data:
             raise MemoryError("no enough memory")
         memcpy(temp_data, <tea.TEA_U8*> value, 16)
@@ -75,7 +76,7 @@ cdef class TEA:
         cdef tea.TEA_U8 i
         for i in range(4):
             (<tea.TEA_U32*> self._secret_key)[i] = (<tea.TEA_U32*> temp_data)[i]
-        free(temp_data)
+        PyMem_Free(temp_data)
         cdef tea.TEA_ErrorCode_t flag = tea.TEA_Config128bitsKey(<tea.TEA_U8*> self._secret_key)
         if flag != tea.TEA_SUCCESS:
             raise Exception("set key wrong")
@@ -86,7 +87,7 @@ cdef class TEA:
         :param text: 8字节 bytes
         :return: 
         """
-        cdef tea.TEA_U8*temp_data = <tea.TEA_U8*> malloc(8 * sizeof(tea.TEA_U8))
+        cdef tea.TEA_U8*temp_data = <tea.TEA_U8*> PyMem_Malloc(8 * sizeof(tea.TEA_U8))
         if not temp_data:
             raise MemoryError("no enough memory")
         memcpy(temp_data, <tea.TEA_U8*> text, 8)
@@ -104,7 +105,7 @@ cdef class TEA:
         :param text: 
         :return: 
         """
-        cdef tea.TEA_U8*temp_data = <tea.TEA_U8*> malloc(8 * sizeof(tea.TEA_U8))
+        cdef tea.TEA_U8*temp_data = <tea.TEA_U8*> PyMem_Malloc(8 * sizeof(tea.TEA_U8))
         if not temp_data:
             raise MemoryError("no enough memory")
         memcpy(temp_data, <tea.TEA_U8*> text, 8)
@@ -127,7 +128,7 @@ cdef class TEA:
         text = bytes([fill_n_or]) + bytes([220]) * n + text + b'\x00' * 7  # 填充
 
         cdef Py_ssize_t l = len(text)
-        cdef tea.TEA_U8*temp_data = <tea.TEA_U8*> malloc(l * sizeof(tea.TEA_U8))
+        cdef tea.TEA_U8*temp_data = <tea.TEA_U8*> PyMem_Malloc(l * sizeof(tea.TEA_U8))
         if not temp_data:
             raise MemoryError("no enough memory")
         memcpy(temp_data, <tea.TEA_U8*> text, l)
@@ -140,8 +141,8 @@ cdef class TEA:
             raise MemoryError("out of memory")
         elif flag == tea.TEA_OTHERS:
             raise Exception("sth wrong")
-        ntohs(temp_data, len(text))
-        return <bytes> temp_data[0:len(text)]
+        ntohs(temp_data, l)
+        return <bytes> temp_data[0:l]
 
     cpdef decrypt(self, bytes text):
         """
@@ -155,7 +156,7 @@ cdef class TEA:
 
         cdef tea.TEA_U8 tag = 0
 
-        cdef tea.TEA_U8*temp_data = <tea.TEA_U8*> malloc(l * sizeof(tea.TEA_U8))
+        cdef tea.TEA_U8*temp_data = <tea.TEA_U8*> PyMem_Malloc(l * sizeof(tea.TEA_U8))
         if not temp_data:
             raise MemoryError("no enough memory")
         memcpy(temp_data, <tea.TEA_U8*> text, l)
