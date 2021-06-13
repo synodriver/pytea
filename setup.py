@@ -10,7 +10,7 @@ from Cython.Build import cythonize
 BUILD_ARGS = defaultdict(lambda: ['-O3', '-g0'])
 
 for compiler, args in [
-    ('msvc', ['/EHsc', '/DHUNSPELL_STATIC', "/Oi", "/O2", "/Ot", r"\utf-8"]),
+    ('msvc', ['/EHsc', '/DHUNSPELL_STATIC', "/Oi", "/O2", "/Ot"]),
     ('gcc', ['-O3', '-g0'])]:
     BUILD_ARGS[compiler] = args
 
@@ -39,7 +39,7 @@ def get_version() -> str:
 
 
 def get_dis():
-    with open("README.md", "r", encoding="utf-8") as f:
+    with open("README.markdown", "r", encoding="utf-8") as f:
         return f.read()
 
 
