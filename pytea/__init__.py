@@ -2,5 +2,5 @@
 from ._tea import TEA
 from .pytea import TEA as PYTEA
 
-__version__ = "0.1.2"
+__version__ = "0.2.0"
 __author__ = "synodriver"
