@@ -44,7 +44,7 @@ SQL https://t.me/mikuri520/671''')
     def test_key(self):
         pass
         data_py = self.pytea.secret_key
-        data_c = self.ctea.secret_key
+        data_c = self.ctea.key
         self.assertEqual(data_c, data_py)
         self.assertEqual(self.ctea.encrypt_times, 16)
 
@@ -95,8 +95,8 @@ SQL https://t.me/mikuri520/671''')
 
     def test_two_instance(self):
         ctea = TEA(bytes(16))
-        self.assertEqual(ctea.secret_key, bytes(16))
-        self.assertEqual(self.ctea.secret_key, self.secret_key)
+        self.assertEqual(ctea.key, bytes(16))
+        self.assertEqual(self.ctea.key, self.secret_key)
 
 
 if __name__ == "__main__":

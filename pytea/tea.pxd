@@ -1,25 +1,32 @@
 # cython: language_level=3
-cdef extern from "src/tea.h":
-    ctypedef unsigned char  TEA_U8
-    ctypedef signed char    TEA_S8
-    ctypedef unsigned short TEA_U16
-    ctypedef signed short   TEA_S16
-    ctypedef unsigned int   TEA_U32
-    ctypedef signed int     TEA_S32
-    ctypedef unsigned long long TEA_U64
-
-    ctypedef enum TEA_ErrorCode_t:
+from libc.stdint cimport uint8_t, uint32_t
+cdef extern from "../src/tea.h" nogil:
+    ctypedef enum TEA_ErrorCode:
         TEA_ERROR
         TEA_SUCCESS
         TEA_MEMORY_ERROR
         TEA_OTHERS
 
-    cdef TEA_ErrorCode_t TEA_Config128bitsKey(TEA_U8 *key)
-    cdef TEA_ErrorCode_t TEA_ConfigEncryptTimes(TEA_U8 t)
+    ctypedef struct TEAObject:
+        uint8_t encrypt_times
+        uint8_t key[16]
 
-    cdef TEA_ErrorCode_t TEA_Encrypt(TEA_U8 *text, TEA_U32 size)
-    cdef TEA_ErrorCode_t TEA_Decrypt(TEA_U8 *text, TEA_U32 size,TEA_U8* tag)
+    cdef TEAObject * TEAObject_New()
 
+    cdef TEA_ErrorCode TEAObject_Init(TEAObject *self, uint8_t *key, uint8_t times)
 
-    cdef TEA_ErrorCode_t TEA_EncryptGroup(TEA_U32 *text, TEA_U32 *key)
-    cdef TEA_ErrorCode_t TEA_DecryptGroup(TEA_U32 *text, TEA_U32 *key)
+    cdef void TEAObject_Del(TEAObject** self)
+
+    cdef TEA_ErrorCode TEAObject_SetKey(TEAObject *self, uint8_t *key)
+
+    cdef TEA_ErrorCode TEAObject_SetEncryptTimes(TEAObject *self, uint8_t t)
+
+    cdef TEA_ErrorCode TEAObject_Encrypt(TEAObject *self, uint8_t *text, uint32_t size)
+
+    cdef TEA_ErrorCode TEAObject_Decrypt(TEAObject *self, uint8_t *text, uint32_t size, uint8_t *tag)
+
+    cdef TEA_ErrorCode TEAObject_EncryptGroup(TEAObject *self, uint32_t *text, uint32_t *key)
+
+    cdef TEA_ErrorCode TEAObject_DecryptGroup(TEAObject *self, uint32_t *text, uint32_t *key)
+
+    cdef void TEA_SwapEndian(uint8_t *data, uint32_t size)

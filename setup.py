@@ -25,8 +25,10 @@ class build_ext_compiler_check(build_ext):
 
 
 ext_modules = [
-    Extension("pytea.tea",
-              sources=["pytea/tea.pyx", "pytea/src/tea.c"], library_dirs=["pytea/src", "pytea"])
+    Extension("pytea._tea",
+              sources=["pytea/_tea.pyx", "src/tea.c", "src/utils.c"],
+              library_dirs=["./src"],
+              define_macros=[("PYTHON", None)])
 ]
 
 
