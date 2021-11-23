@@ -66,7 +66,7 @@ def main():
         python_requires=">=3.6",
         install_requires=["cython"],
         license='GPLv3',
-        ext_modules=cythonize(ext_modules),
+        ext_modules=cythonize(ext_modules, compiler_directives={"cdivision": False}),
         classifiers=[
             "Development Status :: 3 - Alpha",
             "Operating System :: OS Independent",
@@ -78,6 +78,7 @@ def main():
             "Programming Language :: Python :: 3.7",
             "Programming Language :: Python :: 3.8",
             "Programming Language :: Python :: 3.9",
+            "Programming Language :: Python :: 3.10",
             "Programming Language :: Python :: Implementation :: CPython"
         ],
         cmdclass={'build_ext': build_ext_compiler_check},

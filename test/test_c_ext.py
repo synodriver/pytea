@@ -66,9 +66,12 @@ SQL https://t.me/mikuri520/671''')
         pass
 
     def test_encrypt(self):  # 'f8dcdc3132333435' 'b5dc08edb3276052
-        data_c = self.ctea.encrypt("123456".encode())
-        data_py = self.pytea.encrypt("123456".encode())
-        self.assertEqual(data_c, data_py)
+        test_data = "0"
+        for i in range(1000):
+            test_data += str(i)
+            data_c = self.ctea.encrypt(test_data.encode())
+            data_py = self.pytea.encrypt(test_data.encode())
+            self.assertEqual(data_c, data_py, msg=f"fail origin {test_data} ctea{data_c} pytea{data_py}")
         # text的前8字节应该的样子 v0 4175223857 v1 842216501
         # 第一轮加密的v0 v1 2419188727 2979123055
 
