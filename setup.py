@@ -66,7 +66,7 @@ def main():
         python_requires=">=3.6",
         install_requires=["cython"],
         license='GPLv3',
-        ext_modules=cythonize(ext_modules, compiler_directives={"cdivision": False}),
+        ext_modules=cythonize(ext_modules, compiler_directives={"cdivision": True}),
         classifiers=[
             "Development Status :: 3 - Alpha",
             "Operating System :: OS Independent",

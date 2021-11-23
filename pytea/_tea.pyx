@@ -116,9 +116,9 @@ cdef class TEA:
         :param text: 要加密的数据
         :return: 
         """
-        n = (8 - (len(text) + 2)) % 8 + 2  # 填充字符的个数 显然, n至少为2, 取2到9之间 py division
-        # n = (8 - (len(text) + 2)) % 8  # this allows cdivision in cython
-        # n = n + 2 if n >= 0 else n + 10  # simulate py division
+        # n = (8 - (len(text) + 2)) % 8 + 2  # 填充字符的个数 显然, n至少为2, 取2到9之间 py division
+        n = (8 - (len(text) + 2)) % 8  # this allows cdivision in cython
+        n = n + 2 if n >= 0 else n + 10  # simulate py division
 
         fill_n_or = (n - 2) | 0xF8  # 然后在填充字符前部插入1字节, 值为 ((n - 2)|0xF8) 以便标记填充字符的个数.
         text = bytes([fill_n_or]) + bytes([220]) * n + text + b'\x00' * 7  # 填充
