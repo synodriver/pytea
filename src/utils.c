@@ -21,3 +21,12 @@ void TEA_SwapEndian(uint8_t *data, uint32_t size)
         conv(data+i,4);
     }
 }
+
+int TEA_CheckPy()
+{
+#ifdef PYTHON
+    return 1;
+#else
+    return 0;
+#endif
+}

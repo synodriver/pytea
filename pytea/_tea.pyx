@@ -181,3 +181,10 @@ cdef class TEA:
             return data[tag:l - 7]
         finally:
             PyMem_Free(temp_data)
+
+cpdef bint check_pymalloc():
+    """
+    check if PyMem_Malloc is used in libtea
+    :return: bool
+    """
+    return tea.TEA_CheckPy()

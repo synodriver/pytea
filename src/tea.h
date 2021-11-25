@@ -32,12 +32,12 @@
 
 #ifdef PYTHON
 #include "Python.h"
-#define mallocfunc PyMem_Malloc
-#define freefunc PyMem_Free
+#define mallocfunc(...) PyMem_Malloc(__VA_ARGS__)
+#define freefunc(...) PyMem_Free(__VA_ARGS__)
 #else
 #include<stdlib.h>
-#define mallocfunc malloc
-#define freefunc free
+#define mallocfunc(...) malloc(__VA_ARGS__)
+#define freefunc(...) free(__VA_ARGS__)
 #endif
 
 /******************************************************************************
@@ -80,6 +80,8 @@ TEA_ErrorCode TEAObject_EncryptGroup(TEAObject *self,uint32_t *text, uint32_t *k
 TEA_ErrorCode TEAObject_DecryptGroup(TEAObject *self,uint32_t *text, uint32_t *key);
 
 void TEA_SwapEndian(uint8_t *data, uint32_t size);
+
+int TEA_CheckPy();
 /******************************************************************************
  *  Reserved !
  ******************************************************************************/

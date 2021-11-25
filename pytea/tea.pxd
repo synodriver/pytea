@@ -30,3 +30,5 @@ cdef extern from "../src/tea.h" nogil:
     cdef TEA_ErrorCode TEAObject_DecryptGroup(TEAObject *self, uint32_t *text, uint32_t *key)
 
     cdef void TEA_SwapEndian(uint8_t *data, uint32_t size)
+
+    cdef bint TEA_CheckPy()
