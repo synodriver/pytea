@@ -1264,6 +1264,7 @@ static PyObject *__pyx_f_5pytea_4_tea_3TEA_decrypt(struct __pyx_obj_5pytea_4_tea
 
 /* Module declarations from 'pytea._tea' */
 static PyTypeObject *__pyx_ptype_5pytea_4_tea_TEA = 0;
+static int __pyx_f_5pytea_4_tea_check_pymalloc(int __pyx_skip_dispatch); /*proto*/
 #define __Pyx_MODULE_NAME "pytea._tea"
 extern int __pyx_module_is_main_pytea___tea;
 int __pyx_module_is_main_pytea___tea = 0;
@@ -1350,6 +1351,7 @@ static PyObject *__pyx_pf_5pytea_4_tea_3TEA_8encrypt(struct __pyx_obj_5pytea_4_t
 static PyObject *__pyx_pf_5pytea_4_tea_3TEA_10decrypt(struct __pyx_obj_5pytea_4_tea_TEA *__pyx_v_self, PyObject *__pyx_v_text); /* proto */
 static PyObject *__pyx_pf_5pytea_4_tea_3TEA_12__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_5pytea_4_tea_TEA *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_5pytea_4_tea_3TEA_14__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_5pytea_4_tea_TEA *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
+static PyObject *__pyx_pf_5pytea_4_tea_check_pymalloc(CYTHON_UNUSED PyObject *__pyx_self); /* proto */
 static PyObject *__pyx_tp_new_5pytea_4_tea_TEA(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_int_0;
 static PyObject *__pyx_int_2;
@@ -3650,6 +3652,8 @@ static PyObject *__pyx_f_5pytea_4_tea_3TEA_decrypt(struct __pyx_obj_5pytea_4_tea
  *             return data[tag:l - 7]
  *         finally:
  *             PyMem_Free(temp_data)             # <<<<<<<<<<<<<<
+ * 
+ * cpdef bint check_pymalloc():
  */
   /*finally:*/ {
     __pyx_L9_error:;
@@ -3880,6 +3884,82 @@ static PyObject *__pyx_pf_5pytea_4_tea_3TEA_14__setstate_cython__(CYTHON_UNUSED 
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
+
+/* "pytea/_tea.pyx":185
+ *             PyMem_Free(temp_data)
+ * 
+ * cpdef bint check_pymalloc():             # <<<<<<<<<<<<<<
+ *     """
+ *     check if PyMem_Malloc is used in libtea
+ */
+
+static PyObject *__pyx_pw_5pytea_4_tea_1check_pymalloc(PyObject *__pyx_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static int __pyx_f_5pytea_4_tea_check_pymalloc(CYTHON_UNUSED int __pyx_skip_dispatch) {
+  int __pyx_r;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("check_pymalloc", 0);
+
+  /* "pytea/_tea.pyx":190
+ *     :return: bool
+ *     """
+ *     return tea.TEA_CheckPy()             # <<<<<<<<<<<<<<
+ */
+  __pyx_r = TEA_CheckPy();
+  goto __pyx_L0;
+
+  /* "pytea/_tea.pyx":185
+ *             PyMem_Free(temp_data)
+ * 
+ * cpdef bint check_pymalloc():             # <<<<<<<<<<<<<<
+ *     """
+ *     check if PyMem_Malloc is used in libtea
+ */
+
+  /* function exit code */
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* Python wrapper */
+static PyObject *__pyx_pw_5pytea_4_tea_1check_pymalloc(PyObject *__pyx_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static char __pyx_doc_5pytea_4_tea_check_pymalloc[] = "\n    check if PyMem_Malloc is used in libtea\n    :return: bool\n    ";
+static PyObject *__pyx_pw_5pytea_4_tea_1check_pymalloc(PyObject *__pyx_self, CYTHON_UNUSED PyObject *unused) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("check_pymalloc (wrapper)", 0);
+  __pyx_r = __pyx_pf_5pytea_4_tea_check_pymalloc(__pyx_self);
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_5pytea_4_tea_check_pymalloc(CYTHON_UNUSED PyObject *__pyx_self) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("check_pymalloc", 0);
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_f_5pytea_4_tea_check_pymalloc(0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 185, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("pytea._tea.check_pymalloc", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
 static struct __pyx_vtabstruct_5pytea_4_tea_TEA __pyx_vtable_5pytea_4_tea_TEA;
 
 static PyObject *__pyx_tp_new_5pytea_4_tea_TEA(PyTypeObject *t, PyObject *a, PyObject *k) {
@@ -4034,6 +4114,7 @@ static PyTypeObject __pyx_type_5pytea_4_tea_TEA = {
 };
 
 static PyMethodDef __pyx_methods[] = {
+  {"check_pymalloc", (PyCFunction)__pyx_pw_5pytea_4_tea_1check_pymalloc, METH_NOARGS, __pyx_doc_5pytea_4_tea_check_pymalloc},
   {0, 0, 0, 0}
 };
 

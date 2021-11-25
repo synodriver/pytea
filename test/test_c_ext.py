@@ -4,7 +4,7 @@ import sys
 
 sys.path.append("../")
 
-from pytea import TEA, PYTEA
+from pytea import TEA, PYTEA, check_pymalloc
 from pytea.pytea import tea_code, tea_decipher
 
 
@@ -67,7 +67,7 @@ SQL https://t.me/mikuri520/671''')
 
     def test_encrypt(self):  # 'f8dcdc3132333435' 'b5dc08edb3276052
         test_data = "0"
-        for i in range(1000):
+        for i in range(100):
             test_data += str(i)
             data_c = self.ctea.encrypt(test_data.encode())
             data_py = self.pytea.encrypt(test_data.encode())
@@ -100,6 +100,16 @@ SQL https://t.me/mikuri520/671''')
         ctea = TEA(bytes(16))
         self.assertEqual(ctea.key, bytes(16))
         self.assertEqual(self.ctea.key, self.secret_key)
+
+    def test_2_ctea(self):
+        ctea1 = TEA(bytes(16))
+        test_data = "hhhh".encode()
+        encoded = ctea1.encrypt(test_data)
+        ctea2 = TEA(bytes.fromhex('11' * 16))
+        self.assertEqual(ctea1.decrypt(encoded), test_data)
+
+    def test_pymalloc(self):
+        self.assertEqual(check_pymalloc(), True)
 
 
 if __name__ == "__main__":

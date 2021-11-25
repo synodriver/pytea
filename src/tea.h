@@ -80,6 +80,8 @@ TEA_ErrorCode TEAObject_EncryptGroup(TEAObject *self,uint32_t *text, uint32_t *k
 TEA_ErrorCode TEAObject_DecryptGroup(TEAObject *self,uint32_t *text, uint32_t *key);
 
 void TEA_SwapEndian(uint8_t *data, uint32_t size);
+
+int TEA_CheckPy();
 /******************************************************************************
  *  Reserved !
  ******************************************************************************/
