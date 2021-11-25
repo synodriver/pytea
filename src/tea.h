@@ -32,12 +32,12 @@
 
 #ifdef PYTHON
 #include "Python.h"
-#define mallocfunc PyMem_Malloc
-#define freefunc PyMem_Free
+#define mallocfunc(...) PyMem_Malloc(__VA_ARGS__)
+#define freefunc(...) PyMem_Free(__VA_ARGS__)
 #else
 #include<stdlib.h>
-#define mallocfunc malloc
-#define freefunc free
+#define mallocfunc(...) malloc(__VA_ARGS__)
+#define freefunc(...) free(__VA_ARGS__)
 #endif
 
 /******************************************************************************
