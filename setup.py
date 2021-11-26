@@ -68,9 +68,10 @@ def main():
         license='GPLv3',
         ext_modules=cythonize(ext_modules, compiler_directives={"cdivision": True}),
         classifiers=[
-            "Development Status :: 3 - Alpha",
+            "Development Status :: 4 - Beta",
             "Operating System :: OS Independent",
             "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+            "Topic :: Security :: Cryptography",
             "Programming Language :: C",
             "Programming Language :: Cython",
             "Programming Language :: Python",
@@ -82,7 +83,8 @@ def main():
             "Programming Language :: Python :: Implementation :: CPython"
         ],
         cmdclass={'build_ext': build_ext_compiler_check},
-        include_package_data=True
+        include_package_data=True,
+        zip_safe=False
     )
 
 
