@@ -9,10 +9,10 @@ from pytea cimport tea
 cdef class TEA:
     """TEA binding for python"""
     cdef tea.TEAObject * _tea
-    cdef bytes _key
+    cdef const uint8_t[:] _key
     cdef uint8_t _encrypt_times
 
-    def __cinit__(self, bytes secret_key, uint8_t encrypt_times=16):  # bytes会被改变
+    def __cinit__(self, const uint8_t[:] secret_key, uint8_t encrypt_times=16):  # bytes会被改变
         # k = struct.unpack('>LLLL', secret_key[0:16])
         self._key = secret_key
         self._encrypt_times = encrypt_times
@@ -23,7 +23,7 @@ cdef class TEA:
         cdef uint8_t *temp_data = <uint8_t *> PyMem_Malloc(16 * sizeof(uint8_t))
         if temp_data is NULL:
             raise MemoryError()
-        memcpy(temp_data, <uint8_t *> secret_key, 16)
+        memcpy(temp_data, &secret_key[0], 16)
         tea.TEA_SwapEndian(temp_data, 16)
         cdef tea.TEA_ErrorCode flag = tea.TEAObject_Init(self._tea, temp_data, encrypt_times)
         PyMem_Free(temp_data)
@@ -40,19 +40,19 @@ cdef class TEA:
 
     @encrypt_times.setter
     def encrypt_times(self, int value):
-        self._encrypt_times = value
         tea.TEAObject_SetEncryptTimes(self._tea, self._encrypt_times)
+        self._encrypt_times = value
 
     @property
     def key(self):
-        return self._key
+        return bytes(self._key)
 
     @key.setter
-    def key(self, bytes value):
+    def key(self, const uint8_t[:] value):
         cdef uint8_t *temp_data = <uint8_t *> PyMem_Malloc(16 * sizeof(uint8_t))
         if temp_data is NULL:
             raise MemoryError()
-        memcpy(temp_data, <uint8_t *> value, 16)
+        memcpy(temp_data, &value[0], 16)
         tea.TEA_SwapEndian(temp_data, 16)
         cdef tea.TEA_ErrorCode flag = tea.TEAObject_SetKey(self._tea, temp_data)
         if flag != tea.TEA_SUCCESS:
@@ -62,7 +62,7 @@ cdef class TEA:
 
     @cython.wraparound(False)
     @cython.boundscheck(False)
-    cpdef bytes encrypt_group(self, bytes text):
+    cpdef bytes encrypt_group(self, const uint8_t[:] text):
         """
         加密一组 8个字节数据
         :param text: 8字节 bytes
@@ -71,7 +71,7 @@ cdef class TEA:
         cdef uint8_t *temp_data = <uint8_t *> PyMem_Malloc(8 * sizeof(uint8_t))
         if temp_data is NULL:
             raise MemoryError()
-        memcpy(temp_data, <uint8_t *> text, 8)
+        memcpy(temp_data, &text[0], 8)
         tea.TEA_SwapEndian(temp_data, 8)  # 没4个字节切换一次顺序
 
         cdef tea.TEA_ErrorCode flag = tea.TEAObject_EncryptGroup(self._tea, <uint32_t *> temp_data,
@@ -86,7 +86,7 @@ cdef class TEA:
 
     @cython.wraparound(False)
     @cython.boundscheck(False)
-    cpdef bytes decrypt_group(self, bytes text):
+    cpdef bytes decrypt_group(self, const uint8_t[:] text):
         """
         解密一组 8个字节数据
         :param text: 
@@ -95,7 +95,7 @@ cdef class TEA:
         cdef uint8_t *temp_data = <uint8_t *> PyMem_Malloc(8 * sizeof(uint8_t))
         if temp_data is NULL:
             raise MemoryError()
-        memcpy(temp_data, <uint8_t *> text, 8)
+        memcpy(temp_data, &text[0], 8)
         tea.TEA_SwapEndian(temp_data, 8)  # 没4个字节切换一次顺序
 
         cdef tea.TEA_ErrorCode flag = tea.TEAObject_DecryptGroup(self._tea, <uint32_t *> temp_data,
@@ -110,24 +110,24 @@ cdef class TEA:
 
     @cython.wraparound(False)
     @cython.boundscheck(False)
-    cpdef bytes encrypt(self, bytes text):
+    cpdef bytes encrypt(self, const uint8_t[:] text):
         """
         需要填充为8字节的整数倍数
         :param text: 要加密的数据
         :return: 
         """
-        n = (8 - (len(text) + 2)) % 8 + 2  # 填充字符的个数 显然, n至少为2, 取2到9之间 py division
+        n = (8 - (text.shape[0] + 2)) % 8 + 2  # 填充字符的个数 显然, n至少为2, 取2到9之间 py division
         # n = (8 - (len(text) + 2)) % 8  # this allows cdivision in cython
         # n = n + 2 if n >= 0 else n + 10  # simulate py division
 
         fill_n_or = (n - 2) | 0xF8  # 然后在填充字符前部插入1字节, 值为 ((n - 2)|0xF8) 以便标记填充字符的个数.
-        text = bytes([fill_n_or]) + bytes([220]) * n + text + b'\x00' * 7  # 填充
+        text = bytes([fill_n_or]) + bytes([220]) * n + bytes(text) + b'\x00' * 7  # 填充 type: bytes
 
         cdef Py_ssize_t l = len(text)
         cdef uint8_t *temp_data = <uint8_t *> PyMem_Malloc(l * sizeof(uint8_t))
         if temp_data is NULL:
             raise MemoryError()
-        memcpy(temp_data, <uint8_t *> text, l)
+        memcpy(temp_data, &text[0], l)
         tea.TEA_SwapEndian(temp_data, <uint32_t> l)  # 转换字节序 事实证明这一步走对了
 
         cdef tea.TEA_ErrorCode flag = tea.TEAObject_Encrypt(self._tea, temp_data, <uint32_t> len(text))
@@ -145,13 +145,13 @@ cdef class TEA:
 
     @cython.wraparound(False)
     @cython.boundscheck(False)
-    cpdef bytes decrypt(self, bytes text):
+    cpdef bytes decrypt(self, const uint8_t[:] text):
         """
         传入填充了的数据 解密后,应该除去加密的时候填充的字节
         :param text: 要解密的数据
         :return: 
         """
-        cdef Py_ssize_t l = len(text)
+        cdef Py_ssize_t l = text.shape[0]
         if l % 8 != 0 or l < 16:
             raise ValueError("decrypt failed, len%8!=0")
 
@@ -160,7 +160,7 @@ cdef class TEA:
         cdef uint8_t * temp_data = <uint8_t *> PyMem_Malloc(l * sizeof(uint8_t))
         if temp_data is NULL:
             raise MemoryError()
-        memcpy(temp_data, <uint8_t *> text, l)
+        memcpy(temp_data, &text[0], l)
         tea.TEA_SwapEndian(temp_data, <uint32_t> l)
 
         cdef tea.TEA_ErrorCode flag = tea.TEAObject_Decrypt(self._tea, temp_data, <uint32_t> l, &tag)

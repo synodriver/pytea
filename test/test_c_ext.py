@@ -12,7 +12,7 @@ class TestC(unittest.TestCase):
     def setUp(self) -> None:
         self.secret_key = bytes.fromhex('11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 22')
         self.pytea = PYTEA(bytes.fromhex('11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 22'))
-        self.ctea = TEA(bytes.fromhex('11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 22'))
+        self.ctea = TEA(bytearray.fromhex('11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 22'))
 
     def test_encode_long(self):
         test_data = '''下载地址：
@@ -69,7 +69,7 @@ SQL https://t.me/mikuri520/671''')
         test_data = "0"
         for i in range(100):
             test_data += str(i)
-            data_c = self.ctea.encrypt(test_data.encode())
+            data_c = self.ctea.encrypt(bytearray(test_data.encode()))
             data_py = self.pytea.encrypt(test_data.encode())
             self.assertEqual(data_c, data_py, msg=f"fail origin {test_data} ctea{data_c} pytea{data_py}")
         # text的前8字节应该的样子 v0 4175223857 v1 842216501
@@ -78,7 +78,7 @@ SQL https://t.me/mikuri520/671''')
     def test_decrypt(self):  # todo 当前进度在此
         data = bytes.fromhex('9031e3f7b191cf6f7586b3d0a1d690aa')
         data_py = self.pytea.decrypt(data)  # 完整的16字节 4175223857 842216501 905969664 0   pos=2
-        data_c = self.ctea.decrypt(data)
+        data_c = self.ctea.decrypt(bytearray(data))
 
         self.assertEqual(data_c, data_py)
 
