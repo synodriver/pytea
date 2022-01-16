@@ -28,6 +28,7 @@ ext_modules = [
     Extension("pytea._tea",
               sources=["pytea/_tea.pyx", "src/tea.c", "src/utils.c"],
               library_dirs=["./src"],
+              include_dirs=['./src'],
               define_macros=[("PYTHON", None)])
 ]
 

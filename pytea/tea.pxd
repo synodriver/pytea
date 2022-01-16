@@ -1,6 +1,6 @@
 # cython: language_level=3
 from libc.stdint cimport uint8_t, uint32_t
-cdef extern from "../src/tea.h" nogil:
+cdef extern from "tea.h" nogil:
     ctypedef enum TEA_ErrorCode:
         TEA_ERROR
         TEA_SUCCESS

@@ -64,6 +64,8 @@ cdef class TEA:
     @cython.boundscheck(False)
     cpdef bytes encrypt_group(self, const uint8_t[:] text):
         """
+        encrypt_group(self, bytes text) -> bytes
+        
         加密一组 8个字节数据
         :param text: 8字节 bytes
         :return: 
@@ -88,6 +90,8 @@ cdef class TEA:
     @cython.boundscheck(False)
     cpdef bytes decrypt_group(self, const uint8_t[:] text):
         """
+        decrypt_group(self, bytes text) -> bytes
+        
         解密一组 8个字节数据
         :param text: 
         :return: 
@@ -112,6 +116,8 @@ cdef class TEA:
     @cython.boundscheck(False)
     cpdef bytes encrypt(self, const uint8_t[:] text):
         """
+        encrypt(self, bytes text) -> bytes
+        
         需要填充为8字节的整数倍数
         :param text: 要加密的数据
         :return: 
@@ -147,6 +153,8 @@ cdef class TEA:
     @cython.boundscheck(False)
     cpdef bytes decrypt(self, const uint8_t[:] text):
         """
+        decrypt(self, bytes text) -> bytes
+        
         传入填充了的数据 解密后,应该除去加密的时候填充的字节
         :param text: 要解密的数据
         :return: 
