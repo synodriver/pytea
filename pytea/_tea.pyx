@@ -32,7 +32,8 @@ cdef class TEA:
             raise ValueError("init tea object error")
 
     def __dealloc__(self):
-        tea.TEAObject_Del(&self._tea)
+        if self._tea is not NULL:
+            tea.TEAObject_Del(&self._tea)
 
     @property
     def encrypt_times(self):
