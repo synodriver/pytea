@@ -191,6 +191,8 @@ cdef class TEA:
         finally:
             PyMem_Free(temp_data)
 
+@cython.wraparound(False)
+@cython.boundscheck(False)
 cpdef bint check_pymalloc():
     """
     check if PyMem_Malloc is used in libtea

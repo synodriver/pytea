@@ -4504,7 +4504,7 @@ static PyObject *__pyx_f_5pytea_4_tea_3TEA_decrypt(struct __pyx_obj_5pytea_4_tea
  *         finally:
  *             PyMem_Free(temp_data)             # <<<<<<<<<<<<<<
  * 
- * cpdef bint check_pymalloc():
+ * @cython.wraparound(False)
  */
   /*finally:*/ {
     __pyx_L9_error:;
@@ -4745,9 +4745,9 @@ static PyObject *__pyx_pf_5pytea_4_tea_3TEA_14__setstate_cython__(CYTHON_UNUSED 
   return __pyx_r;
 }
 
-/* "pytea/_tea.pyx":194
- *             PyMem_Free(temp_data)
- * 
+/* "pytea/_tea.pyx":196
+ * @cython.wraparound(False)
+ * @cython.boundscheck(False)
  * cpdef bint check_pymalloc():             # <<<<<<<<<<<<<<
  *     """
  *     check if PyMem_Malloc is used in libtea
@@ -4759,7 +4759,7 @@ static int __pyx_f_5pytea_4_tea_check_pymalloc(CYTHON_UNUSED int __pyx_skip_disp
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("check_pymalloc", 0);
 
-  /* "pytea/_tea.pyx":199
+  /* "pytea/_tea.pyx":201
  *     :return: bool
  *     """
  *     return tea.TEA_CheckPy()             # <<<<<<<<<<<<<<
@@ -4767,9 +4767,9 @@ static int __pyx_f_5pytea_4_tea_check_pymalloc(CYTHON_UNUSED int __pyx_skip_disp
   __pyx_r = TEA_CheckPy();
   goto __pyx_L0;
 
-  /* "pytea/_tea.pyx":194
- *             PyMem_Free(temp_data)
- * 
+  /* "pytea/_tea.pyx":196
+ * @cython.wraparound(False)
+ * @cython.boundscheck(False)
  * cpdef bint check_pymalloc():             # <<<<<<<<<<<<<<
  *     """
  *     check if PyMem_Malloc is used in libtea
@@ -4804,7 +4804,7 @@ static PyObject *__pyx_pf_5pytea_4_tea_check_pymalloc(CYTHON_UNUSED PyObject *__
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("check_pymalloc", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_f_5pytea_4_tea_check_pymalloc(0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 194, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_f_5pytea_4_tea_check_pymalloc(0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 196, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
