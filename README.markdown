@@ -16,7 +16,15 @@
 ```python
 import pytea
 
-tea = pytea.TEA(secret_key=bytes(16), encrypt_times=16)
+tea = pytea.TEA(bytes(16), 16)
 data = tea.encrypt("哈哈哈".encode())
 print(tea.decrypt(data).decode())
 ```
+
+### 安装
+- python -m pip install pytea2
+
+### 本地编译
+- git clone https://github.com/synodriver/pytea.git
+- python -m pip install -r requirements.txt
+- python setup.py sdist bdist_wheel
