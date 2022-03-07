@@ -6,6 +6,7 @@ from libc.stdint cimport uint8_t, uint32_t
 
 from pytea cimport tea
 
+@cython.final
 cdef class TEA:
     """TEA binding for python"""
     cdef tea.TEAObject * _tea
@@ -13,6 +14,13 @@ cdef class TEA:
     cdef uint8_t _encrypt_times
 
     def __cinit__(self, const uint8_t[:] secret_key, uint8_t encrypt_times=16):  # bytes会被改变
+        """
+        __init__(self, secret_key: Union[bytes, bytearray], encrypt_times: int) -> TEA
+
+        :param secret_key:
+        :param encrypt_times:
+        :return:
+        """
         # k = struct.unpack('>LLLL', secret_key[0:16])
         self._key = secret_key
         self._encrypt_times = encrypt_times
@@ -65,7 +73,7 @@ cdef class TEA:
     @cython.boundscheck(False)
     cpdef bytes encrypt_group(self, const uint8_t[:] text):
         """
-        encrypt_group(self, bytes text) -> bytes
+        encrypt_group(self, text: Union[bytes, bytearray]) -> bytes
         
         加密一组 8个字节数据
         :param text: 8字节 bytes
@@ -91,7 +99,7 @@ cdef class TEA:
     @cython.boundscheck(False)
     cpdef bytes decrypt_group(self, const uint8_t[:] text):
         """
-        decrypt_group(self, bytes text) -> bytes
+        decrypt_group(self, text: Union[bytes, bytearray]) -> bytes
         
         解密一组 8个字节数据
         :param text: 
@@ -117,7 +125,7 @@ cdef class TEA:
     @cython.boundscheck(False)
     cpdef bytes encrypt(self, const uint8_t[:] text):
         """
-        encrypt(self, bytes text) -> bytes
+        encrypt(self, text: Union[bytes, bytearray]) -> bytes
         
         需要填充为8字节的整数倍数
         :param text: 要加密的数据
@@ -154,7 +162,7 @@ cdef class TEA:
     @cython.boundscheck(False)
     cpdef bytes decrypt(self, const uint8_t[:] text):
         """
-        decrypt(self, bytes text) -> bytes
+        decrypt(self, text: Union[bytes, bytearray]) -> bytes
         
         传入填充了的数据 解密后,应该除去加密的时候填充的字节
         :param text: 要解密的数据
@@ -195,6 +203,8 @@ cdef class TEA:
 @cython.boundscheck(False)
 cpdef bint check_pymalloc():
     """
+    check_pymalloc() -> bool
+    
     check if PyMem_Malloc is used in libtea
     :return: bool
     """
