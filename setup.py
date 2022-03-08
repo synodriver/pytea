@@ -29,7 +29,8 @@ ext_modules = [
               sources=["pytea/_tea.pyx", "src/tea.c", "src/utils.c"],
               library_dirs=["./src"],
               include_dirs=['./src'],
-              define_macros=[("PYTHON", None)])
+              define_macros=[("PYTHON", None)],
+              embedsignature=True)
 ]
 
 
