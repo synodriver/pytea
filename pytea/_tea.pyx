@@ -10,10 +10,10 @@ from pytea cimport tea
 cdef class TEA:
     """TEA binding for python"""
     cdef tea.TEAObject * _tea
-    cdef const uint8_t[:] _key
+    cdef const uint8_t[::1] _key
     cdef uint8_t _encrypt_times
 
-    def __cinit__(self, const uint8_t[:] secret_key, uint8_t encrypt_times=16):  # bytes会被改变
+    def __cinit__(self, const uint8_t[::1] secret_key, uint8_t encrypt_times=16):  # bytes会被改变
         """
         __init__(self, secret_key: Union[bytes, bytearray], encrypt_times: int) -> TEA
 
@@ -57,7 +57,7 @@ cdef class TEA:
         return bytes(self._key)
 
     @key.setter
-    def key(self, const uint8_t[:] value):
+    def key(self, const uint8_t[::1] value):
         cdef uint8_t *temp_data = <uint8_t *> PyMem_Malloc(16 * sizeof(uint8_t))
         if temp_data is NULL:
             raise MemoryError()
@@ -71,7 +71,7 @@ cdef class TEA:
 
     @cython.wraparound(False)
     @cython.boundscheck(False)
-    cpdef bytes encrypt_group(self, const uint8_t[:] text):
+    cpdef bytes encrypt_group(self, const uint8_t[::1] text):
         """
         encrypt_group(self, text: Union[bytes, bytearray]) -> bytes
         
@@ -97,7 +97,7 @@ cdef class TEA:
 
     @cython.wraparound(False)
     @cython.boundscheck(False)
-    cpdef bytes decrypt_group(self, const uint8_t[:] text):
+    cpdef bytes decrypt_group(self, const uint8_t[::1] text):
         """
         decrypt_group(self, text: Union[bytes, bytearray]) -> bytes
         
@@ -123,7 +123,7 @@ cdef class TEA:
 
     @cython.wraparound(False)
     @cython.boundscheck(False)
-    cpdef bytes encrypt(self, const uint8_t[:] text):
+    cpdef bytes encrypt(self, const uint8_t[::1] text):
         """
         encrypt(self, text: Union[bytes, bytearray]) -> bytes
         
@@ -160,7 +160,7 @@ cdef class TEA:
 
     @cython.wraparound(False)
     @cython.boundscheck(False)
-    cpdef bytes decrypt(self, const uint8_t[:] text):
+    cpdef bytes decrypt(self, const uint8_t[::1] text):
         """
         decrypt(self, text: Union[bytes, bytearray]) -> bytes
         
