@@ -42,7 +42,6 @@ SQL https://t.me/mikuri520/671''')
         self.assertEqual(data, data_c)
 
     def test_key(self):
-        pass
         data_py = self.pytea.secret_key
         data_c = self.ctea.key
         self.assertEqual(data_c, data_py)
@@ -55,7 +54,6 @@ SQL https://t.me/mikuri520/671''')
         # v0 4175223857 v1 842216501  执行和 v0 2419188727 v1 2979123055
         # print(data_c, data_py)
         self.assertEqual(data_c, data_py)
-        pass
 
     def test_decrypt_group(self):
         data_c = self.ctea.decrypt_group(bytes.fromhex('9031e3f7b191cf6f'))  # v0 2419188727 v1 2979123055
@@ -63,7 +61,6 @@ SQL https://t.me/mikuri520/671''')
                                self.secret_key)  # key (286331153, 286331153, 286331153, 286331170)
         # v0 4175223857 v1 842216501
         self.assertEqual(data_c, data_py)
-        pass
 
     def test_encrypt(self):  # 'f8dcdc3132333435' 'b5dc08edb3276052
         test_data = "0"
@@ -88,7 +85,6 @@ SQL https://t.me/mikuri520/671''')
             data = bytes.fromhex(f.read().strip())
         ans = ctea.decrypt(data)
         self.assertEqual(len(ans), 1671)
-        pass
 
     def test_veryloing(self):
         data_py = self.pytea.encrypt(bytes(4096))

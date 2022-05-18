@@ -20,19 +20,17 @@ if __name__ == '__main__':
     enc = QQ.encrypt(plaintext.encode())
 
     start = time.time()
-    for i in range(1000):
+    for _ in range(1000):
         # plaintext = bytes(plaintext, encoding="utf-8")
         # print("".join(["%02x" % i for i in enc]))
         dec = QQ.decrypt(enc)
         QQ.encrypt(dec)
-        # print(dec.decode())
     print(f"py耗时{(pytime:=time.time() - start)}")
     start = time.time()
-    for i in range(1000):
+    for _ in range(1000):
         # plaintext = bytes(plaintext, encoding="utf-8")
         # print("".join(["%02x" % i for i in enc]))
         dec = CQQ.decrypt(enc)
         CQQ.encrypt(dec)
-        # print(dec.decode())
     print(f"c耗时{(ctime:=time.time() - start)}")
     print(f"chaju {pytime/ctime}")
